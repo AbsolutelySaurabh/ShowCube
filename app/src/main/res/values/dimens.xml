@@ -1,12 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="nav_header_vertical_spacing">16dp</dimen>
-    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="item_margin">10dp</dimen>
+    <dimen name="item_width">150dp</dimen>
+    <dimen name="item_card_width">0dp</dimen>
+    <dimen name="item_padding">8dp</dimen>
+    <dimen name="view_all_margin">24dp</dimen>
+
+    <dimen name="navigation_bar_margin">0dp</dimen>
+
+    <!-- Spacing -->
+    <dimen name="spacing_small">4dp</dimen>
+    <dimen name="spacing_medium">8dp</dimen>
+    <dimen name="spacing_large">16dp</dimen>
+    <dimen name="spacing_big">24dp</dimen>
+    <dimen name="spacing_huge">32dp</dimen>
+    <dimen name="spacing_media_details">8dp</dimen>
+    <dimen name="details_action_padding">16dp</dimen>
+
+    <!-- Image -->
+    <dimen name="poster_height">200dp</dimen>
+    <dimen name="poster_width">140dp</dimen>
+    <dimen name="related_media_height">180dp</dimen>
+    <dimen name="related_media_width">130dp</dimen>
+    <dimen name="actor_photo_height">150dp</dimen>
+    <dimen name="actor_photo_width">150dp</dimen>
+    <dimen name="details_poster_width">120dp</dimen>
+    <dimen name="details_poster_height">180dp</dimen>
+    <dimen name="details_backdrop_height">300dp</dimen>
+
+    <!-- Z-axis elevations -->
+    <dimen name="z_app_bar">4dp</dimen>
+    <dimen name="z_card">2dp</dimen>
+    <dimen name="z_fab">6dp</dimen>
+    <dimen name="touch_raise">6dp</dimen>
+    <dimen name="touched_app_bar">8dp</dimen>
+    <dimen name="z_fab_over_touchable_app_bar">9dp</dimen>
+
+    <dimen name="nested_scroll_margin_top">-140dp</dimen>
+    <dimen name="body_sheet_width">500dp</dimen>
+    <dimen name="details_sheet_height">100dp</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="shot_collapsed_app_bar_height">200dp</dimen>
+    <dimen name="drag_dismiss_distance">112dp</dimen>
+
+
 
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="card_height">304dp</dimen>
+    <dimen name="md_keylines">11dp</dimen>
+    <dimen name="tile_padding">8dp</dimen>
+    <dimen name="tile_height">160dp</dimen>
+    <dimen name="app_bar_height">256dp</dimen>
+    <dimen name="article_keylines">72dp</dimen>
+    <dimen name="avator_size">40dp</dimen>
+    <dimen name="card_title_height">70dp</dimen>
+    <dimen name="article_titles">20sp</dimen>
+    <dimen name="cards_button_width">48dp</dimen>
+    <dimen name="cards_button_height">48dp</dimen>
+    <dimen name="article_subheading">16sp</dimen>
+    <dimen name="card_image_height">200dp</dimen>
+    <dimen name="list_body">14sp</dimen>
+    <dimen name="navheader_height">222dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="profile_width">75dp</dimen>
-    <dimen name="profile_height">75dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
 </resources>

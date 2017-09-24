@@ -1,29 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.absolutelysaurabh.showtime">
+    package="com.example.absolutelysaurabh.popularmovies_bottombar">
 
-    <!-- Internet Permission -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Now Playing"
+        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/NoActionBar">
-        <activity android:name=".Activity.HomeActivity">
+        android:theme="@style/PopMovies">
+
+        <activity
+            android:name=".base.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/PopMovies">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".Activity.SingleMovieActivity" />
-        <activity android:name=".Activity.TrailerActivity"
-            android:theme="@android:style/Theme.Dialog"
-            />
+
+        <activity
+            android:name=".base.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/PopMovies">
+
+        </activity>
     </application>
 
 </manifest>
