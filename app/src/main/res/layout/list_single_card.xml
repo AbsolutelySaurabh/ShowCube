@@ -9,18 +9,20 @@
     >
 
     <LinearLayout
-        android:layout_width="150dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:id="@+id/itemImage"/>
+            android:id="@+id/media_poster"
+            android:src="@drawable/spectre"
+            />
+
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/media_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Superman"

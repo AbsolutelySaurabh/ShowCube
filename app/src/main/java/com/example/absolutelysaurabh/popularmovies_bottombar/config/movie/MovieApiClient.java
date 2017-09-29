@@ -1,4 +1,4 @@
-package com.example.absolutelysaurabh.popularmovies_bottombar.config;
+package com.example.absolutelysaurabh.popularmovies_bottombar.config.movie;
 
 import com.example.absolutelysaurabh.popularmovies_bottombar.other.Config;
 
@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by absolutelysaurabh on 23/9/17.
  */
-public class ApiClient {
+public class MovieApiClient {
 
     public static final String BASE_URL = Config.BASE_URL;
     private static Retrofit retrofit = null;

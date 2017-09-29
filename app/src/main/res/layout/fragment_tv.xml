@@ -2,24 +2,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.absolutelysaurabh.popularmovies_bottombar.fragments.TvFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.absolutelysaurabh.popularmovies_bottombar.fragments.NearbyFragment">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <!--<ScrollView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--&gt;-->
+
+    <!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="vertical">-->
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/recycler_view_top"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="300dp"-->
+    <!--android:orientation="horizontal"-->
+    <!--android:scrollbars="none" />-->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/my_recycler_view"
+        android:nestedScrollingEnabled="true"
+        android:layout_margin="4dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:gravity="center"
-        android:layout_marginLeft="50dp"
-        >
+        android:scrollbars="none" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/image"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="20dp"
-            />
-
-    </RelativeLayout>
-
+    <!--</LinearLayout>-->
+    <!--</ScrollView>-->
 </FrameLayout>
+
+

@@ -4,11 +4,20 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.absolutelysaurabh.popularmovies_bottombar.R;
+import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.other.RecyclerViewDataAdapter;
+import com.example.absolutelysaurabh.popularmovies_bottombar.base.SplashActivity;
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.Movie;
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.SectionDataModel;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,10 +28,14 @@ import com.example.absolutelysaurabh.popularmovies_bottombar.R;
  * create an instance of this fragment.
  */
 public class TvFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    View movieFragment;
+    private TextView mTextMessage;
+    ArrayList<Movie> tvs;
+    ArrayList<SectionDataModel> allMovieSampleData;
+    ArrayList<Movie> al_tv;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -65,8 +78,30 @@ public class TvFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tv, container, false);
+        movieFragment = inflater.inflate(R.layout.fragment_tv, container, false);
+
+        allMovieSampleData = new ArrayList<SectionDataModel>();
+        al_tv = new ArrayList<>();
+
+        setTvFragment();
+
+        return movieFragment;
+
     }
+
+    public void setTvFragment(){
+
+        RecyclerView my_recycler_view = movieFragment.findViewById(R.id.my_recycler_view);
+        my_recycler_view.setHasFixedSize(true);
+        my_recycler_view.setNestedScrollingEnabled(true);
+
+        RecyclerViewDataAdapter adapter = new RecyclerViewDataAdapter(getContext(), SplashActivity.allTvSampleData);
+        my_recycler_view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        my_recycler_view.setAdapter(adapter);
+
+    }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {

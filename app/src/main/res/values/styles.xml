@@ -20,11 +20,11 @@
     </style>
 
     <!--<style name="PreferenceThemeOverlay">-->
-        <!--<item name="preferenceScreenStyle">@style/Preference.PreferenceScreen</item>-->
-        <!--<item name="preferenceFragmentStyle">@style/PreferenceFragment</item>-->
-        <!--<item name="preferenceCategoryStyle">@style/Preference.Category</item>-->
-        <!--<item name="preferenceStyle">@style/Preference</item>-->
-        <!--<item name="preferenceFragmentListStyle">@style/PreferenceFragmentList</item>-->
+    <!--<item name="preferenceScreenStyle">@style/Preference.PreferenceScreen</item>-->
+    <!--<item name="preferenceFragmentStyle">@style/PreferenceFragment</item>-->
+    <!--<item name="preferenceCategoryStyle">@style/Preference.Category</item>-->
+    <!--<item name="preferenceStyle">@style/Preference</item>-->
+    <!--<item name="preferenceFragmentListStyle">@style/PreferenceFragmentList</item>-->
     <!--</style>-->
 
     <style name="Widget">
@@ -55,7 +55,7 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Widget.Details"/>
+    <style name="Widget.Details" />
 
     <style name="Widget.Details.Action">
         <item name="android:scaleX">0</item>
@@ -80,4 +80,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">18sp</item>
     </style>
+
+    <style name="PopMovies.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopMovies.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>

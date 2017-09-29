@@ -18,6 +18,9 @@ public class Config {
     public static String MOVIE_URL_PAGE = "&page=1";
     public static String MOVIE_URL_REGION = "&region=IN";
 
+    public static String DEVELOPER_KEY = "AIzaSyDgMjklegWj7v_KNLIDmMDqYwiRoE5Dhr8";
 
+    public static String Youtube_get_video_url_part_1 = "https://api.themoviedb.org/3/movie/";
 
+    public static String Youtube_get_video_url_part_2 = "/videos?api_key=" + API_KEY + "&language=en-US";
 }

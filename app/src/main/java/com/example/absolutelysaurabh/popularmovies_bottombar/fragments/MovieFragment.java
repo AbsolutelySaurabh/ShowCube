@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,21 +13,11 @@ import android.widget.TextView;
 
 import com.example.absolutelysaurabh.popularmovies_bottombar.R;
 import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.other.RecyclerViewDataAdapter;
-import com.example.absolutelysaurabh.popularmovies_bottombar.config.ApiClient;
-import com.example.absolutelysaurabh.popularmovies_bottombar.config.ApiInterface;
-import com.example.absolutelysaurabh.popularmovies_bottombar.other.Config;
-import com.example.absolutelysaurabh.popularmovies_bottombar.config.MovieResponse;
+import com.example.absolutelysaurabh.popularmovies_bottombar.base.SplashActivity;
 import com.example.absolutelysaurabh.popularmovies_bottombar.model.Movie;
 import com.example.absolutelysaurabh.popularmovies_bottombar.model.SectionDataModel;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,8 +33,8 @@ public class MovieFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     View movieFragment;
     private TextView mTextMessage;
-    List<Movie> movies;
-    ArrayList<SectionDataModel> allSampleData;
+    ArrayList<Movie> movies;
+    ArrayList<SectionDataModel> allMovieSampleData;
     ArrayList<Movie> al_movie;
 
     private String mParam1;
@@ -89,93 +78,26 @@ public class MovieFragment extends Fragment {
 
         movieFragment = inflater.inflate(R.layout.fragment_movie, container, false);
 
-        allSampleData = new ArrayList<SectionDataModel>();
+        allMovieSampleData = new ArrayList<SectionDataModel>();
         al_movie = new ArrayList<>();
 
-        getMovies();
-        createDummyData();
-       // Log.e("SECOND SUCCESS: ", "Number of movies received: " + String.valueOf(movies.size()));
-
+        setNowPlayingMovies();
 
         return movieFragment;
     }
 
-    public void getMovies(){
+    public void setNowPlayingMovies(){
 
-        ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
+        RecyclerView my_recycler_view = movieFragment.findViewById(R.id.my_recycler_view);
+        my_recycler_view.setHasFixedSize(true);
+        my_recycler_view.setNestedScrollingEnabled(true);
 
-        Map<String, String> params = new HashMap<String, String>();
-        params.put("api_key", Config.API_KEY);
-        params.put("region", "IN");
-
-        Call<MovieResponse> call = apiService.getNowPlayingMoviesSimpleQuery(Config.API_KEY);
-
-        call.enqueue(new Callback<MovieResponse>() {
-            @Override
-            public void onResponse(Call<MovieResponse>call, Response<MovieResponse> response) {
-
-                movies = response.body().getResults();
-
-                RecyclerView my_recycler_view = movieFragment.findViewById(R.id.my_recycler_view);
-                my_recycler_view.setHasFixedSize(true);
-                my_recycler_view.setNestedScrollingEnabled(true);
-
-                RecyclerViewDataAdapter adapter = new RecyclerViewDataAdapter(getContext(), allSampleData);
-                my_recycler_view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                my_recycler_view.setAdapter(adapter);
-                Log.e("SUCCESS: ", "Number of movies received: " + String.valueOf(movies.size()));
-
-            }
-
-            @Override
-            public void onFailure(Call<MovieResponse>call, Throwable t) {
-                // Log error here since request failed
-                Log.e("FAILURE: ", t.toString());
-            }
-        });
+        RecyclerViewDataAdapter adapter = new RecyclerViewDataAdapter(getContext(), SplashActivity.allMovieSampleData);
+        my_recycler_view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        my_recycler_view.setAdapter(adapter);
 
     }
 
-    public void createDummyData() {
-        for (int i = 0; i < 4; i++) {
-
-            SectionDataModel dm = new SectionDataModel();
-
-
-            if(i==0){
-
-                dm.setHeaderTitle("Now Playing");
-
-               // setNowPlayingData();
-
-
-            }else
-                if(i==1){
-
-                    dm.setHeaderTitle("Popular");
-                }else
-                    if(i==2){
-                        dm.setHeaderTitle("Top Rated");
-
-                    }else
-                        if(i==3){
-
-                            dm.setHeaderTitle("Upcoming");
-                        }
-
-
-            ArrayList<Movie> singleItem = new ArrayList<Movie>();
-            for (int j = 0; j <= 7; j++) {
-
-                singleItem.add(new Movie(" "));
-            }
-
-            dm.setAllItemsInSection(singleItem);
-
-            allSampleData.add(dm);
-
-        }
-    }
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
