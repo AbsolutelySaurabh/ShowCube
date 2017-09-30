@@ -1,4 +1,4 @@
-package com.example.absolutelysaurabh.popularmovies_bottombar.adapter.other;
+package com.example.absolutelysaurabh.popularmovies_bottombar.adapter.tv;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,13 +15,13 @@ import com.example.absolutelysaurabh.popularmovies_bottombar.model.SectionDataMo
 
 import java.util.ArrayList;
 
-public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDataAdapter.ItemRowHolder> {
+public class Tv_RecyclerViewDataAdapter extends RecyclerView.Adapter<Tv_RecyclerViewDataAdapter.ItemRowHolder> {
 
     private ArrayList<SectionDataModel> dataList;
     private Context mContext;
     public static String EXTRA_MESSAGE = "";
 
-    public RecyclerViewDataAdapter(Context context, ArrayList<SectionDataModel> dataList) {
+    public Tv_RecyclerViewDataAdapter(Context context, ArrayList<SectionDataModel> dataList) {
         this.dataList = dataList;
         this.mContext = context;
     }
@@ -42,41 +42,41 @@ public class RecyclerViewDataAdapter extends RecyclerView.Adapter<RecyclerViewDa
 
         itemRowHolder.itemTitle.setText(sectionName);
 
-        SectionListDataAdapter itemListDataAdapter = new SectionListDataAdapter(mContext, singleSectionItems, position);
+        Tv_SectionListDataAdapter itemListDataAdapter = new Tv_SectionListDataAdapter(mContext, singleSectionItems, position);
         itemRowHolder.recycler_view_list.setHasFixedSize(true);
         itemRowHolder.recycler_view_list.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         itemRowHolder.recycler_view_list.setAdapter(itemListDataAdapter);
 
-        itemRowHolder.textMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(mContext, MoreActivity.class);
-
-                if(sectionName.equals("Top Rated")){
-                    intent.putExtra(EXTRA_MESSAGE, "topRated");
-                    intent.putExtra("position", (position));
-
-                }else
-                    if(sectionName.equals("Upcoming")){
-                        intent.putExtra(EXTRA_MESSAGE, "upcoming");
-                        intent.putExtra("position", (position));
-                    }else
-                        if(sectionName.equals("Now Playing")){
-                            intent.putExtra(EXTRA_MESSAGE, "nowPlaying");
-                            intent.putExtra("position", (position));
-
-                        }else
-                            if(sectionName.equals("Popular")){
-                                intent.putExtra(EXTRA_MESSAGE, "popular");
-                                intent.putExtra("position", (position));
-
-                            }
-
-                mContext.startActivity(intent);
-
-            }
-        });
+//        itemRowHolder.textMore.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(mContext, MoreActivity.class);
+//
+//                if(sectionName.equals("Top Rated")){
+//                    intent.putExtra(EXTRA_MESSAGE, "topRated");
+//                    intent.putExtra("position", (position));
+//
+//                }else
+//                    if(sectionName.equals("Upcoming")){
+//                        intent.putExtra(EXTRA_MESSAGE, "upcoming");
+//                        intent.putExtra("position", (position));
+//                    }else
+//                        if(sectionName.equals("Now Playing")){
+//                            intent.putExtra(EXTRA_MESSAGE, "nowPlaying");
+//                            intent.putExtra("position", (position));
+//
+//                        }else
+//                            if(sectionName.equals("Popular")){
+//                                intent.putExtra(EXTRA_MESSAGE, "popular");
+//                                intent.putExtra("position", (position));
+//
+//                            }
+//
+//                mContext.startActivity(intent);
+//
+//            }
+//        });
 
     }
     @Override

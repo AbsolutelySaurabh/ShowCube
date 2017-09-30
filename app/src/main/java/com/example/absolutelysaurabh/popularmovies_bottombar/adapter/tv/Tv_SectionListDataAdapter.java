@@ -1,4 +1,4 @@
-package com.example.absolutelysaurabh.popularmovies_bottombar.adapter.other;
+package com.example.absolutelysaurabh.popularmovies_bottombar.adapter.tv;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,13 +18,13 @@ import com.example.absolutelysaurabh.popularmovies_bottombar.model.Movie;
 
 import java.util.ArrayList;
 
-public class SectionListDataAdapter extends RecyclerView.Adapter<SectionListDataAdapter.SingleItemRowHolder> {
+public class Tv_SectionListDataAdapter extends RecyclerView.Adapter<Tv_SectionListDataAdapter.SingleItemRowHolder> {
 
     private ArrayList<Movie> itemsList;
     private Context mContext;
     public int sectionPosition;
 
-    public SectionListDataAdapter(Context context, ArrayList<Movie> itemsList, int sectionPosition) {
+    public Tv_SectionListDataAdapter(Context context, ArrayList<Movie> itemsList, int sectionPosition) {
         this.itemsList = itemsList;
         this.mContext = context;
         this.sectionPosition = sectionPosition;

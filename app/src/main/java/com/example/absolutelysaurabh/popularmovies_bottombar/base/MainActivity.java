@@ -1,5 +1,7 @@
 package com.example.absolutelysaurabh.popularmovies_bottombar.base;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,6 +18,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.example.absolutelysaurabh.popularmovies_bottombar.R;
@@ -35,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected Toolbar actionBar;
     protected DrawerLayout drawerLayout;
     public static String TAG = "Movie";
+    BottomBar bottomBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+
+        bottomBar = (BottomBar) findViewById(R.id.bottom_navigation);
 
         setUi();
 
@@ -71,7 +78,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void setBottomNavigation(){
 
-        BottomBar bottomBar = (BottomBar) findViewById(R.id.bottom_navigation);
         bottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelected(@IdRes int tabId) {
@@ -118,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.fade_in,
                 android.R.anim.fade_out);
+
         transaction.replace(R.id.main_container, fragment, TAG);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -172,6 +179,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.fade_in,
                 android.R.anim.fade_out);
+
         transaction.replace(R.id.main_container, fragment, TAG);
         transaction.addToBackStack(null);
         transaction.commit();

@@ -3,6 +3,7 @@ package com.example.absolutelysaurabh.popularmovies_bottombar.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +13,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.absolutelysaurabh.popularmovies_bottombar.R;
-import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.other.RecyclerViewDataAdapter;
+import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.movie.RecyclerViewDataAdapter;
+import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.tv.Tv_RecyclerViewDataAdapter;
 import com.example.absolutelysaurabh.popularmovies_bottombar.base.SplashActivity;
 import com.example.absolutelysaurabh.popularmovies_bottombar.model.Movie;
 import com.example.absolutelysaurabh.popularmovies_bottombar.model.SectionDataModel;
@@ -31,7 +33,7 @@ public class TvFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    View movieFragment;
+    View tvFragment;
     private TextView mTextMessage;
     ArrayList<Movie> tvs;
     ArrayList<SectionDataModel> allMovieSampleData;
@@ -78,26 +80,50 @@ public class TvFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        movieFragment = inflater.inflate(R.layout.fragment_tv, container, false);
+        tvFragment = inflater.inflate(R.layout.fragment_tv, container, false);
 
         allMovieSampleData = new ArrayList<SectionDataModel>();
         al_tv = new ArrayList<>();
 
         setTvFragment();
 
-        return movieFragment;
+        return tvFragment;
 
     }
 
     public void setTvFragment(){
 
-        RecyclerView my_recycler_view = movieFragment.findViewById(R.id.my_recycler_view);
-        my_recycler_view.setHasFixedSize(true);
-        my_recycler_view.setNestedScrollingEnabled(true);
+        final Handler handler = new Handler();
+        new Thread(new Runnable(){
+            @Override
+            public void run(){
+                //long running code
+                //this is running on a background thread
+                        handler.post(new Runnable(){
+                            @Override
+                            public void run(){
 
-        RecyclerViewDataAdapter adapter = new RecyclerViewDataAdapter(getContext(), SplashActivity.allTvSampleData);
-        my_recycler_view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        my_recycler_view.setAdapter(adapter);
+                                RecyclerView my_recycler_view = tvFragment.findViewById(R.id.my_recycler_view);
+                                my_recycler_view.setHasFixedSize(true);
+                                my_recycler_view.setNestedScrollingEnabled(true);
+
+                                Tv_RecyclerViewDataAdapter adapter = new Tv_RecyclerViewDataAdapter(getContext(), SplashActivity.allTvSampleData);
+                                my_recycler_view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                                my_recycler_view.setAdapter(adapter);
+
+                            }
+                        });
+            }
+        }).start();
+
+//
+//        RecyclerView my_recycler_view = tvFragment.findViewById(R.id.my_recycler_view);
+//        my_recycler_view.setHasFixedSize(true);
+//        my_recycler_view.setNestedScrollingEnabled(true);
+//
+//        Tv_RecyclerViewDataAdapter adapter = new Tv_RecyclerViewDataAdapter(getContext(), SplashActivity.allTvSampleData);
+//        my_recycler_view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+//        my_recycler_view.setAdapter(adapter);
 
     }
 

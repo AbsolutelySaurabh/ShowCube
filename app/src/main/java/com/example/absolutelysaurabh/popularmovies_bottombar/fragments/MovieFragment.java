@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.absolutelysaurabh.popularmovies_bottombar.R;
-import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.other.RecyclerViewDataAdapter;
+import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.movie.RecyclerViewDataAdapter;
 import com.example.absolutelysaurabh.popularmovies_bottombar.base.SplashActivity;
 import com.example.absolutelysaurabh.popularmovies_bottombar.model.Movie;
 import com.example.absolutelysaurabh.popularmovies_bottombar.model.SectionDataModel;

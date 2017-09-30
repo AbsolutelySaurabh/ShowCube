@@ -226,7 +226,7 @@ public class SplashActivity extends Activity {
                 //Log.e("Data POPULAR...: ", movies.get(0).getTitle());
 
                 dm.setAllItemsInSection(movies);
-                allMovieSampleData.add(dm);
+                allTvSampleData.add(dm);
 
                 Log.e("SUCCESS: ", "Number of Top Rated movies received: " + String.valueOf(movies.size()));
 
@@ -259,7 +259,7 @@ public class SplashActivity extends Activity {
                // Log.e("Data POPULAR...: ", movies.get(0).getTitle());
 
                 dm.setAllItemsInSection(movies);
-                allMovieSampleData.add(dm);
+                allTvSampleData.add(dm);
 
                 Log.e("SUCCESS: ", "Number of Top Rated movies received: " + String.valueOf(movies.size()));
 
@@ -293,7 +293,7 @@ public class SplashActivity extends Activity {
                // Log.e("Data POPULAR...: ", movies.get(0).getTitle());
 
                 dm.setAllItemsInSection(movies);
-                allMovieSampleData.add(dm);
+                allTvSampleData.add(dm);
 
                 Log.e("SUCCESS: ", "Number of Top Rated movies received: " + String.valueOf(movies.size()));
 
@@ -324,10 +324,8 @@ public class SplashActivity extends Activity {
                 ArrayList<Movie> movies;
                 movies = response.body().getResults();
 
-//                Log.e("Data POPULAR...: ", movies.get(0).getTitle());
-
                 dm.setAllItemsInSection(movies);
-                allMovieSampleData.add(dm);
+                allTvSampleData.add(dm);
 
                 Log.e("SUCCESS: ", "Number of Top Rated movies received: " + String.valueOf(movies.size()));
 
