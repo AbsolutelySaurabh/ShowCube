@@ -5,6 +5,7 @@ package com.example.absolutelysaurabh.popularmovies_bottombar.config.tv;
  */
 
 import com.example.absolutelysaurabh.popularmovies_bottombar.model.Movie;
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.Tv;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ public class TvResponse {
     @SerializedName("page")
     private int page;
     @SerializedName("results")
-    private ArrayList<Movie> results;
+    private ArrayList<Tv> results;
     @SerializedName("total_results")
     private int totalResults;
     @SerializedName("total_pages")
@@ -29,11 +30,11 @@ public class TvResponse {
         this.page = page;
     }
 
-    public ArrayList<Movie> getResults() {
+    public ArrayList<Tv> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<Movie> results) {
+    public void setResults(ArrayList<Tv> results) {
         this.results = results;
     }
 

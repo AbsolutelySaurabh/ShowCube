@@ -122,8 +122,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager manager = getSupportFragmentManager();
 
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(android.R.anim.fade_in,
-                android.R.anim.fade_out);
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
 
         transaction.replace(R.id.main_container, fragment, TAG);
         transaction.addToBackStack(null);
@@ -141,8 +140,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager manager = getSupportFragmentManager();
 
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(android.R.anim.fade_in,
-                android.R.anim.fade_out);
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
         transaction.replace(R.id.main_container, fragment, TAG);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -159,8 +157,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager manager = getSupportFragmentManager();
 
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(android.R.anim.fade_in,
-                android.R.anim.fade_out);
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+
         transaction.replace(R.id.main_container, fragment, TAG);
         transaction.addToBackStack(null);
         transaction.commit();
@@ -177,8 +175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         FragmentManager manager = getSupportFragmentManager();
 
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(android.R.anim.fade_in,
-                android.R.anim.fade_out);
+        transaction.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
 
         transaction.replace(R.id.main_container, fragment, TAG);
         transaction.addToBackStack(null);

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:layout_width="match_parent">
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
+        android:fitsSystemWindows="true"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
@@ -25,16 +28,17 @@
             android:padding="5dp">
 
             <ImageView
-                android:id="@+id/movie_image"
+                android:id="@+id/media_poster"
                 android:layout_width="150dp"
                 android:layout_height="200dp"
                 tools:src="@drawable/spectre"
-                android:layout_marginLeft="10dp" />
+                android:layout_marginLeft="5dp" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+
+                >
 
                 <!--<android.support.design.widget.FloatingActionButton-->
                 <!--android:layout_width="70dp"-->
@@ -43,33 +47,79 @@
                 <!--android:backgroundTint="@color/colorPrimaryDark"-->
                 <!--/>-->
 
-                <TextView
-                    android:id="@+id/movie_release_date"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="13/1/2017"
-                    android:gravity="center"
-                    android:textColor="#eceff1"
-                    android:padding="30dp"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    />
-                <TextView
-                    android:id="@+id/movie_rating"
-                    android:layout_width="match_parent"
+                    android:layout_centerInParent="true"
+                    >
+
+                <RelativeLayout
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/date_placeholder"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="10.0"
-                    android:gravity="center"
-                    android:textSize="24sp"
-                    android:layout_marginLeft="70dp"
-                    android:layout_marginRight="70dp"
-                    android:textColor="#fffde7"
-                    android:textStyle="bold"
-                    />
-            </LinearLayout>
+                    >
+
+                    <ImageView
+                        android:id="@+id/calender_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_date"
+                        android:padding="5dp"
+                        android:layout_gravity="center_horizontal"
+                        />
+
+                    <TextView
+                        android:layout_toRightOf="@id/calender_image"
+                        android:id="@+id/media_release_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="13/1/2017"
+                        android:layout_centerVertical="true"
+                        android:textColor="#eceff1"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_below="@id/date_placeholder"
+                        android:id="@+id/rating_placeholder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        >
+
+                        <ImageView
+                            android:padding="5dp"
+                            android:tint="@color/white"
+                            android:id="@+id/rating_image"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_top_rated"
+                            android:layout_gravity="center_horizontal"
+                            />
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@id/rating_image"
+                            android:id="@+id/media_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="10.0"
+                            android:textColor="#eceff1"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            />
+
+                    </RelativeLayout>
+            </RelativeLayout>
+                </RelativeLayout>
         </LinearLayout>
         <TextView
-            android:id="@+id/movie_description"
+            android:id="@+id/media_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="This is the Overvie of the movie in the Hobbit and the TV in teh news "
@@ -80,13 +130,39 @@
 
         <View
             android:id="@+id/line_up"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_centerHorizontal="true"
             android:background="@color/white"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:id="@+id/recommended"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Recommended: "
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/my_recycler_view"
+                android:nestedScrollingEnabled="true"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
+        </LinearLayout>
+
     </LinearLayout>
+
 </ScrollView>

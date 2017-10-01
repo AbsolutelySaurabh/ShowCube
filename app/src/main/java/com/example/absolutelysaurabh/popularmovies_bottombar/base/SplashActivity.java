@@ -15,8 +15,9 @@ import com.example.absolutelysaurabh.popularmovies_bottombar.config.tv.TvApiClie
 import com.example.absolutelysaurabh.popularmovies_bottombar.config.tv.TvApiInterface;
 import com.example.absolutelysaurabh.popularmovies_bottombar.config.tv.TvResponse;
 import com.example.absolutelysaurabh.popularmovies_bottombar.model.Movie;
-import com.example.absolutelysaurabh.popularmovies_bottombar.model.SectionDataModel;
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.section.Movie_SectionDataModel;
 import com.example.absolutelysaurabh.popularmovies_bottombar.model.Tv;
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.section.Tv_SectionDataModel;
 import com.example.absolutelysaurabh.popularmovies_bottombar.other.Config;
 
 import java.util.ArrayList;
@@ -33,7 +34,8 @@ public class SplashActivity extends Activity {
     private static int SPLASH_TIME_OUT = 3000;
 
     private TextView mTextMessage;
-    public static ArrayList<SectionDataModel> allMovieSampleData, allTvSampleData;
+    public static ArrayList<Movie_SectionDataModel> allMovieSampleData;
+    public static ArrayList<Tv_SectionDataModel> allTvSampleData;
     public static ArrayList<Movie> al_movie;
     public static ArrayList<Tv> al_tv;
 
@@ -43,7 +45,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        allMovieSampleData = new ArrayList<SectionDataModel>();
+        allMovieSampleData = new ArrayList<Movie_SectionDataModel>();
         allTvSampleData  =new ArrayList<>();
         al_movie = new ArrayList<>();
         al_tv = new ArrayList<>();
@@ -66,7 +68,7 @@ public class SplashActivity extends Activity {
     }
 
 
-    public void getNowPlayingMovies(final SectionDataModel dm){
+    public void getNowPlayingMovies(final Movie_SectionDataModel dm){
 
         MovieApiInterface apiService = MovieApiClient.getClient().create(MovieApiInterface.class);
 
@@ -100,7 +102,7 @@ public class SplashActivity extends Activity {
         });
     }
 
-    public void getTopRatedMovies(final SectionDataModel dm){
+    public void getTopRatedMovies(final Movie_SectionDataModel dm){
 
         MovieApiInterface apiService = MovieApiClient.getClient().create(MovieApiInterface.class);
 
@@ -135,7 +137,7 @@ public class SplashActivity extends Activity {
     }
 
 
-    public void getUpcomingMovies(final SectionDataModel dm){
+    public void getUpcomingMovies(final Movie_SectionDataModel dm){
 
         MovieApiInterface apiService = MovieApiClient.getClient().create(MovieApiInterface.class);
 
@@ -172,7 +174,7 @@ public class SplashActivity extends Activity {
     }
 
 
-    public void getPopularMovies(final SectionDataModel dm){
+    public void getPopularMovies(final Movie_SectionDataModel dm){
 
         MovieApiInterface apiService = MovieApiClient.getClient().create(MovieApiInterface.class);
 
@@ -206,7 +208,7 @@ public class SplashActivity extends Activity {
         });
     }
 
-    public void getAiringTodayTvs(final SectionDataModel dm){
+    public void getAiringTodayTvs(final Tv_SectionDataModel dm){
 
         TvApiInterface apiService = TvApiClient.getClient().create(TvApiInterface.class);
 
@@ -220,15 +222,15 @@ public class SplashActivity extends Activity {
             @Override
             public void onResponse(Call<TvResponse>call, Response<TvResponse> response) {
 
-                ArrayList<Movie> movies;
-                movies = response.body().getResults();
+                ArrayList<Tv> tvs;
+                tvs = response.body().getResults();
 
-                //Log.e("Data POPULAR...: ", movies.get(0).getTitle());
+                Log.e("TV AIRING TODAY...: ", tvs.get(0).getTitle());
 
-                dm.setAllItemsInSection(movies);
+                dm.setAllItemsInSection(tvs);
                 allTvSampleData.add(dm);
 
-                Log.e("SUCCESS: ", "Number of Top Rated movies received: " + String.valueOf(movies.size()));
+                Log.e("SUCCESS: ", "Number of AIRING Tvs received: " + String.valueOf(tvs.size()));
 
             }
             @Override
@@ -239,7 +241,7 @@ public class SplashActivity extends Activity {
         });
     }
 
-    public void getOnTheAirTvs(final SectionDataModel dm){
+    public void getOnTheAirTvs(final Tv_SectionDataModel dm){
 
         TvApiInterface apiService = TvApiClient.getClient().create(TvApiInterface.class);
 
@@ -253,15 +255,13 @@ public class SplashActivity extends Activity {
             @Override
             public void onResponse(Call<TvResponse>call, Response<TvResponse> response) {
 
-                ArrayList<Movie> movies;
-                movies = response.body().getResults();
+                ArrayList<Tv> tvs;
+                tvs = response.body().getResults();
 
-               // Log.e("Data POPULAR...: ", movies.get(0).getTitle());
-
-                dm.setAllItemsInSection(movies);
+                dm.setAllItemsInSection(tvs);
                 allTvSampleData.add(dm);
 
-                Log.e("SUCCESS: ", "Number of Top Rated movies received: " + String.valueOf(movies.size()));
+                Log.e("SUCCESS: ", "Number of On THE AIR TVs received: " + String.valueOf(tvs.size()));
 
             }
             @Override
@@ -273,7 +273,7 @@ public class SplashActivity extends Activity {
     }
 
 
-    public void getPopularTvs(final SectionDataModel dm){
+    public void getPopularTvs(final Tv_SectionDataModel dm){
 
         TvApiInterface apiService = TvApiClient.getClient().create(TvApiInterface.class);
 
@@ -287,15 +287,13 @@ public class SplashActivity extends Activity {
             @Override
             public void onResponse(Call<TvResponse>call, Response<TvResponse> response) {
 
-                ArrayList<Movie> movies;
-                movies = response.body().getResults();
+                ArrayList<Tv> tvs;
+                tvs = response.body().getResults();
 
-               // Log.e("Data POPULAR...: ", movies.get(0).getTitle());
-
-                dm.setAllItemsInSection(movies);
+                dm.setAllItemsInSection(tvs);
                 allTvSampleData.add(dm);
 
-                Log.e("SUCCESS: ", "Number of Top Rated movies received: " + String.valueOf(movies.size()));
+                Log.e("SUCCESS: ", "Number of Popular TVs received: " + String.valueOf(tvs.size()));
 
             }
             @Override
@@ -307,7 +305,7 @@ public class SplashActivity extends Activity {
     }
 
 
-    public void getTopRatedTvs(final SectionDataModel dm){
+    public void getTopRatedTvs(final Tv_SectionDataModel dm){
 
         TvApiInterface apiService = TvApiClient.getClient().create(TvApiInterface.class);
 
@@ -321,13 +319,13 @@ public class SplashActivity extends Activity {
             @Override
             public void onResponse(Call<TvResponse>call, Response<TvResponse> response) {
 
-                ArrayList<Movie> movies;
-                movies = response.body().getResults();
+                ArrayList<Tv> tvs;
+                tvs = response.body().getResults();
 
-                dm.setAllItemsInSection(movies);
+                dm.setAllItemsInSection(tvs);
                 allTvSampleData.add(dm);
 
-                Log.e("SUCCESS: ", "Number of Top Rated movies received: " + String.valueOf(movies.size()));
+                Log.e("SUCCESS: ", "Number of Top Rated TVs received: " + String.valueOf(tvs.size()));
 
             }
             @Override
@@ -341,7 +339,7 @@ public class SplashActivity extends Activity {
     public void getSetTvFragmentUi() {
         for (int i = 0; i < 4; i++) {
 
-            SectionDataModel dm = new SectionDataModel();
+            Tv_SectionDataModel dm = new Tv_SectionDataModel();
 
             if(i==0){
 
@@ -375,7 +373,7 @@ public class SplashActivity extends Activity {
     public void getSetMovieFragmentUi() {
         for (int i = 0; i < 4; i++) {
 
-            SectionDataModel dm = new SectionDataModel();
+            Movie_SectionDataModel dm = new Movie_SectionDataModel();
 
             if(i==0){
 

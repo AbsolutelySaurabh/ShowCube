@@ -1,4 +1,4 @@
-package com.example.absolutelysaurabh.popularmovies_bottombar.adapter.more;
+package com.example.absolutelysaurabh.popularmovies_bottombar.adapter.more.adapter;
 
 /**
  * Created by absolutelysaurabh on 23/8/17.
@@ -13,8 +13,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.absolutelysaurabh.popularmovies_bottombar.R;
 import com.example.absolutelysaurabh.popularmovies_bottombar.base.SplashActivity;
-import com.example.absolutelysaurabh.popularmovies_bottombar.model.Movie;
-import com.example.absolutelysaurabh.popularmovies_bottombar.viewHolder.more.MoreActivityViewHolder;
+import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.more.viewHolder.MoreActivityViewHolder;
 
 /**
  * Adapter to display recycler view.
@@ -51,9 +50,6 @@ public class MoreActivityContentAdapter extends RecyclerView.Adapter<MoreActivit
             requestOptions.placeholder(R.drawable.spectre);
             requestOptions.error(R.drawable.spectre);
 
-            Log.e("Movie arrayList size:  ", String.valueOf(SplashActivity.allMovieSampleData.get(section_position)
-                    .getAllItemsInSection().size()));
-
             Log.e("POSTERURL: ", posterBaseUrl);
 
             try {
@@ -63,8 +59,8 @@ public class MoreActivityContentAdapter extends RecyclerView.Adapter<MoreActivit
                 n.printStackTrace();
             }
 
-            holder.title.setText(SplashActivity.allMovieSampleData.get(section_position)
-                    .getAllItemsInSection().get(position).getTitle());
+//            holder.title.setText(SplashActivity.allMovieSampleData.get(section_position)
+//                    .getAllItemsInSection().get(position).getTitle());
 
         }catch (IndexOutOfBoundsException e){
             e.printStackTrace();

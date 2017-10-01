@@ -2,12 +2,31 @@ package com.example.absolutelysaurabh.popularmovies_bottombar.activity.more.sing
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.absolutelysaurabh.popularmovies_bottombar.R;
+import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.movie.adapter.RecyclerViewDataAdapter;
+import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.movie.adapter.SectionListDataAdapter;
+import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.recommended.adapter.Radapter;
 import com.example.absolutelysaurabh.popularmovies_bottombar.base.SplashActivity;
+import com.example.absolutelysaurabh.popularmovies_bottombar.config.VideoResponse;
+import com.example.absolutelysaurabh.popularmovies_bottombar.config.movie.MovieApiClient;
+import com.example.absolutelysaurabh.popularmovies_bottombar.config.movie.MovieApiInterface;
+import com.example.absolutelysaurabh.popularmovies_bottombar.config.movie.MovieResponse;
+import com.example.absolutelysaurabh.popularmovies_bottombar.config.tv.TvApiClient;
+import com.example.absolutelysaurabh.popularmovies_bottombar.config.tv.TvApiInterface;
+import com.example.absolutelysaurabh.popularmovies_bottombar.config.tv.TvResponse;
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.Movie;
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.Tv;
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.Video;
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.section.Movie_SectionDataModel;
 import com.example.absolutelysaurabh.popularmovies_bottombar.other.Config;
 import com.google.android.youtube.player.YouTubeBaseActivity;
 import com.google.android.youtube.player.YouTubeInitializationResult;
@@ -22,19 +41,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.internal.framed.Header;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
-    private static String URL_VIDEOS_ONE = "https://api.themoviedb.org/3/movie/";
-    private static String URL_VDEOS_TWO = "/videos?api_key=5b4b359c1e593af429152b47752d4247&language=en-US&page=1";
     private static String VIDEO_URL ="";
 
     public static ArrayList<String> al_video_urls;
 
     public static final String API_KEY = Config.DEVELOPER_KEY;
-    public static  String VIDEO_ID = "";
+    public static  String VIDEO_ID;
     private static final int RECOVERY_DIALOG_REQUEST = 1;
 
     private YouTubePlayer youTubePlayer;
@@ -50,37 +72,82 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
 
         al_video_urls  =new ArrayList<>();
 
-        String movieId = getIntent().getStringExtra("movieId");
-        int sectionPosition = getIntent().getIntExtra("sectionPosition", 0);
-        int itemPosition = getIntent().getIntExtra("itemPosition", 0);
+        String movieORtv = getIntent().getStringExtra("movieORtv");
+        if(movieORtv.equals("movie")){
 
-        VIDEO_URL = Config.Youtube_get_video_url_part_1 + movieId + Config.Youtube_get_video_url_part_2;
-        getVideo(VIDEO_URL);
+            int sectionPosition = getIntent().getIntExtra("sectionPosition", 1);
+            int itemPosition = getIntent().getIntExtra("itemPosition", 1);
+            String movieId = getIntent().getStringExtra("movieId");
 
-        String title  = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getTitle();
-        String overview = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getOverview();
-        String rating = String.valueOf(SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getPopularity());
-        String release_date = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getReleaseDate();
-        String imageUrl = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getPosterPath();
+            VIDEO_URL = Config.Youtube_movie_get_video_url_part_1 + movieId + Config.Youtube_get_video_url_part_2;
+            getVideoMovie(movieId);
 
-        final String url = "http://image.tmdb.org/t/p/w185/"+imageUrl;
+            String title  = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getTitle();
+            String overview = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getOverview();
+            String rating = String.valueOf(SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getPopularity());
+            String release_date = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getReleaseDate();
+            String imageUrl = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getPosterPath();
 
-//        TextView titleView = (TextView) this.findViewById(R.id.movie_title);
-        TextView overviewView = (TextView) this.findViewById(R.id.movie_description);
-        TextView dateView = (TextView) this.findViewById(R.id.movie_release_date);
-        TextView ratingView = (TextView) this.findViewById(R.id.movie_rating);
+            //TextView titleView = (TextView) this.findViewById(R.id.media_title);
+            TextView overviewView = (TextView) this.findViewById(R.id.media_overview);
+            TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
+            TextView ratingView = (TextView) this.findViewById(R.id.media_rating);
+            ImageView media_poster = (ImageView) this.findViewById(R.id.media_poster);
 
-//        titleView.setText(title);
-        overviewView.setText(overview);
-        dateView.setText(release_date);
-        ratingView.setText(rating);
+            //titleView.setText(title);
+            overviewView.setText(overview);
+            dateView.setText(release_date);
+            ratingView.setText(rating);
 
+            String posterBaseUrl = "http://image.tmdb.org/t/p/w185/"+ imageUrl;
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions.placeholder(R.drawable.superman);
+            requestOptions.error(R.drawable.superman);
 
+            Glide.with(this).load(posterBaseUrl)
+                    .apply(requestOptions).thumbnail(0.5f).into(media_poster);
+
+            getRecommeddedMovies(movieId);
+
+        }else
+            if(movieORtv.equals("tv")){
+
+                String tvId = getIntent().getStringExtra("tvId");
+                int sectionPosition = getIntent().getIntExtra("sectionPosition", 0);
+                int itemPosition = getIntent().getIntExtra("itemPosition", 0);
+
+                VIDEO_URL = Config.Youtube_tv_get_video_url_part_1 + tvId + Config.Youtube_get_video_url_part_2;
+                getVideoTv(tvId);
+
+                String title  = SplashActivity.allTvSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getTitle();
+                String overview = SplashActivity.allTvSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getOverview();
+                String vote_average = String.valueOf(SplashActivity.allTvSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getVoteAverage());
+                String imageUrl = SplashActivity.allTvSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getPosterPath();
+
+//TextView titleView = (TextView) this.findViewById(R.id.media_title);
+                TextView overviewView = (TextView) this.findViewById(R.id.media_overview);
+                //TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
+                TextView ratingView = (TextView) this.findViewById(R.id.media_rating);
+                ImageView media_poster = (ImageView) this.findViewById(R.id.media_poster);
+
+                //titleView.setText(title);
+                overviewView.setText(overview);
+                ratingView.setText(vote_average);
+
+                String posterBaseUrl = "http://image.tmdb.org/t/p/w185/"+ imageUrl;
+                RequestOptions requestOptions = new RequestOptions();
+                requestOptions.placeholder(R.drawable.superman);
+                requestOptions.error(R.drawable.superman);
+
+                Glide.with(this).load(posterBaseUrl)
+                        .apply(requestOptions).thumbnail(0.5f).into(media_poster);
+
+                getRecommeddedTvs(tvId);
+            }
     }
 
     @Override
-    public void onInitializationFailure(YouTubePlayer.Provider provider,
-                                        YouTubeInitializationResult errorReason) {
+    public void onInitializationFailure(YouTubePlayer.Provider provider, YouTubeInitializationResult errorReason) {
         if (errorReason.isUserRecoverableError()) {
             errorReason.getErrorDialog(this, RECOVERY_DIALOG_REQUEST).show();
         } else {
@@ -162,57 +229,167 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
         }
     }
 
+    public void getVideoMovie(String movieId){
 
-    public void getVideo(String video_url){
+        MovieApiInterface apiService = MovieApiClient.getClient().create(MovieApiInterface.class);
 
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("api_key", Config.API_KEY);
+        params.put("language", "en-US");
 
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(this, video_url , new JsonHttpResponseHandler() {
+        Call<VideoResponse> call = apiService.getVideo(Integer.parseInt(movieId), params);
+
+        call.enqueue(new Callback<VideoResponse>() {
             @Override
-            public void onSuccess(int statusCode, cz.msebera.android.httpclient.Header[] headers, JSONObject response) {
+            public void onResponse(Call<VideoResponse>call, Response<VideoResponse> response) {
 
-                Log.e("Response VIDEOS GET: ", response.toString());
+                ArrayList<Video> videos;
+                videos = response.body().getResults();
 
                 try {
-                    JSONArray array = response.getJSONArray("results");
-                    for(int i=0; i< array.length();i++){
+                    if(!videos.get(0).equals("null")){
 
-                        JSONObject object = array.getJSONObject(i);
-                        String video_key = object.getString("key");
-                        al_video_urls.add(video_key);
+                        VIDEO_ID = videos.get(0).getKey();
+                    }else{
 
+                        VIDEO_ID = videos.get(1).getKey();
                     }
-
-                    try {
-                        if(!al_video_urls.get(0).equals("null")){
-
-                            VIDEO_ID = al_video_urls.get(0);
-                        }else{
-
-                            VIDEO_ID = al_video_urls.get(1);
-                        }
-                    }catch(IndexOutOfBoundsException e){
-                        e.printStackTrace();
-                    }
-
-                    youTubePlayerFragment = (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youtubeplayerfragment);
-                    youTubePlayerFragment.initialize(API_KEY, SingleMovieActivity.this);
-
-                    myPlayerStateChangeListener = new MyPlayerStateChangeListener();
-                    myPlaybackEventListener = new MyPlaybackEventListener();
-
-                } catch (JSONException e) {
+                }catch(IndexOutOfBoundsException e){
                     e.printStackTrace();
                 }
 
-            }
 
+                youTubePlayerFragment = (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youtubeplayerfragment);
+                youTubePlayerFragment.initialize(API_KEY, SingleMovieActivity.this);
+
+                myPlayerStateChangeListener = new MyPlayerStateChangeListener();
+                myPlaybackEventListener = new MyPlaybackEventListener();
+
+            }
             @Override
-            public void onFailure(int statusCode, cz.msebera.android.httpclient.Header[] headers, Throwable throwable, JSONArray errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
+            public void onFailure(Call<VideoResponse>call, Throwable t) {
+                // Log error here since request failed
+                Log.e("FAILURE: ", t.toString());
             }
         });
     }
 
+    public void getVideoTv(String tvId){
+
+        TvApiInterface apiService = TvApiClient.getClient().create(TvApiInterface.class);
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("api_key", Config.API_KEY);
+        params.put("language", "en-US");
+
+        Call<VideoResponse> call = apiService.getVideo(Integer.parseInt(tvId), params);
+
+        call.enqueue(new Callback<VideoResponse>() {
+            @Override
+            public void onResponse(Call<VideoResponse>call, Response<VideoResponse> response) {
+
+                ArrayList<Video> videos;
+                videos = response.body().getResults();
+
+                try {
+                    if(!videos.get(0).equals("null")){
+
+                        VIDEO_ID = videos.get(0).getKey();
+                    }else{
+
+                        VIDEO_ID = videos.get(1).getKey();
+                    }
+                }catch(IndexOutOfBoundsException e){
+                    e.printStackTrace();
+                }
+
+
+                youTubePlayerFragment = (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youtubeplayerfragment);
+                youTubePlayerFragment.initialize(API_KEY, SingleMovieActivity.this);
+
+                myPlayerStateChangeListener = new MyPlayerStateChangeListener();
+                myPlaybackEventListener = new MyPlaybackEventListener();
+
+            }
+            @Override
+            public void onFailure(Call<VideoResponse>call, Throwable t) {
+                // Log error here since request failed
+                Log.e("FAILURE: ", t.toString());
+            }
+        });
+    }
+
+
+    public void getRecommeddedMovies(final String movieId){
+
+        MovieApiInterface apiService = MovieApiClient.getClient().create(MovieApiInterface.class);
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("api_key", Config.API_KEY);
+        params.put("language", "en-US");
+
+        Call<MovieResponse> call = apiService.getRecommendedMovies(Integer.parseInt(movieId), params);
+
+        call.enqueue(new Callback<MovieResponse>() {
+            @Override
+            public void onResponse(Call<MovieResponse>call, Response<MovieResponse> response) {
+
+                ArrayList<Movie> movies;
+                movies = response.body().getResults();
+
+                RecyclerView my_recycler_view = findViewById(R.id.my_recycler_view);
+                my_recycler_view.setHasFixedSize(true);
+                my_recycler_view.setNestedScrollingEnabled(true);
+
+                Radapter adapter = new Radapter(getApplicationContext(), movies, "movie");
+                my_recycler_view.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                my_recycler_view.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<MovieResponse>call, Throwable t) {
+                // Log error here since request failed
+                Log.e("FAILURE: ", t.toString());
+            }
+        });
+    }
+
+    public void getRecommeddedTvs(String tvId){
+
+        TvApiInterface apiService = MovieApiClient.getClient().create(TvApiInterface.class);
+
+       // https://api.themoviedb.org/3/tv/1418/recommendations?api_key=5b4b359c1e593af429152b47752d4247&language=en-US&page=1
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("api_key", Config.API_KEY);
+        params.put("language", "en");
+
+        Call<TvResponse> call = apiService.getRecommendedTvs(Integer.parseInt(tvId), params);
+
+        call.enqueue(new Callback<TvResponse>() {
+            @Override
+            public void onResponse(Call<TvResponse>call, Response<TvResponse> response) {
+
+                ArrayList<Tv> movies;
+                movies = response.body().getResults();
+
+                RecyclerView my_recycler_view = findViewById(R.id.my_recycler_view);
+                my_recycler_view.setHasFixedSize(true);
+                my_recycler_view.setNestedScrollingEnabled(true);
+
+                Radapter adapter = new Radapter(movies, getApplicationContext(), "tv");
+                my_recycler_view.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+                my_recycler_view.setAdapter(adapter);
+
+            }
+
+            @Override
+            public void onFailure(Call<TvResponse>call, Throwable t) {
+                // Log error here since request failed
+                Log.e("FAILURE: ", t.toString());
+            }
+        });
+    }
 
 }

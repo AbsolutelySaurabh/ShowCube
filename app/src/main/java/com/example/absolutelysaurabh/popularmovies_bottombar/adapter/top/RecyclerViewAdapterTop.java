@@ -13,16 +13,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.absolutelysaurabh.popularmovies_bottombar.R;
-import com.example.absolutelysaurabh.popularmovies_bottombar.model.SectionDataModel;
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.section.Movie_SectionDataModel;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapterTop extends RecyclerView.Adapter<RecyclerViewAdapterTop.ItemRowHolder> {
 
-    private ArrayList<SectionDataModel> dataList;
+    private ArrayList<Movie_SectionDataModel> dataList;
     private Context mContext;
 
-    public RecyclerViewAdapterTop(Context context, ArrayList<SectionDataModel> dataList) {
+    public RecyclerViewAdapterTop(Context context, ArrayList<Movie_SectionDataModel> dataList) {
         this.dataList = dataList;
         this.mContext = context;
     }

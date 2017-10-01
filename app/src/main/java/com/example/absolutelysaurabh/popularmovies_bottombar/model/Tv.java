@@ -21,15 +21,16 @@ public class Tv {
     private Integer id;
     @SerializedName("name")
     private String title;
-    @SerializedName("origin_country")
-    private String originCountry;
+   // @SerializedName("origin_country")
+    //private String originCountry;
     @SerializedName("original_language")
     private String originalLanguage;
     @SerializedName("vote_average")
     private Double voteAverage;
 
-    public Tv(String posterPath, String overview, List<Integer> genreIds, Integer id,
-                 String originalName, String originalLanguage, Double voteAverage) {
+    public Tv(String posterPath, String overview, List<Integer> genreIds, Integer id,String originalName,
+              String originalLanguage, Double voteAverage) {
+
         this.posterPath = posterPath;
         this.overview = overview;
         this.genreIds = genreIds;

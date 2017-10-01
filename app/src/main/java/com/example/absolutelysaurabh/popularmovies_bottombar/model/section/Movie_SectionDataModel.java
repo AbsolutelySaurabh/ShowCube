@@ -1,4 +1,6 @@
-package com.example.absolutelysaurabh.popularmovies_bottombar.model;
+package com.example.absolutelysaurabh.popularmovies_bottombar.model.section;
+
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.Movie;
 
 import java.util.ArrayList;
 
@@ -6,7 +8,7 @@ import java.util.ArrayList;
  * Created by absolutelysaurabh on 23/9/17.
  */
 
-public class SectionDataModel {
+public class Movie_SectionDataModel {
 
 
 
@@ -14,10 +16,10 @@ public class SectionDataModel {
     private ArrayList<Movie> allItemsInSection;
 
 
-    public SectionDataModel() {
+    public Movie_SectionDataModel() {
 
     }
-    public SectionDataModel(String headerTitle, ArrayList<Movie> allItemsInSection) {
+    public Movie_SectionDataModel(String headerTitle, ArrayList<Movie> allItemsInSection) {
         this.headerTitle = headerTitle;
         this.allItemsInSection = allItemsInSection;
     }

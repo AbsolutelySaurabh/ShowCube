@@ -10,8 +10,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.example.absolutelysaurabh.popularmovies_bottombar.R;
-import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.more.MoreActivityContentAdapter;
-import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.movie.RecyclerViewDataAdapter;
+import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.more.adapter.MoreActivityContentAdapter;
+import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.movie.adapter.RecyclerViewDataAdapter;
 
 public class MoreActivity extends AppCompatActivity {
 

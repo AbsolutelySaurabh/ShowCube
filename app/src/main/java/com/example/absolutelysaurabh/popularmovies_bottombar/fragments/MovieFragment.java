@@ -12,10 +12,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.absolutelysaurabh.popularmovies_bottombar.R;
-import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.movie.RecyclerViewDataAdapter;
+import com.example.absolutelysaurabh.popularmovies_bottombar.adapter.movie.adapter.RecyclerViewDataAdapter;
 import com.example.absolutelysaurabh.popularmovies_bottombar.base.SplashActivity;
 import com.example.absolutelysaurabh.popularmovies_bottombar.model.Movie;
-import com.example.absolutelysaurabh.popularmovies_bottombar.model.SectionDataModel;
+import com.example.absolutelysaurabh.popularmovies_bottombar.model.section.Movie_SectionDataModel;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class MovieFragment extends Fragment {
     View movieFragment;
     private TextView mTextMessage;
     ArrayList<Movie> movies;
-    ArrayList<SectionDataModel> allMovieSampleData;
+    ArrayList<Movie_SectionDataModel> allMovieSampleData;
     ArrayList<Movie> al_movie;
 
     private String mParam1;
@@ -78,7 +78,7 @@ public class MovieFragment extends Fragment {
 
         movieFragment = inflater.inflate(R.layout.fragment_movie, container, false);
 
-        allMovieSampleData = new ArrayList<SectionDataModel>();
+        allMovieSampleData = new ArrayList<Movie_SectionDataModel>();
         al_movie = new ArrayList<>();
 
         setNowPlayingMovies();

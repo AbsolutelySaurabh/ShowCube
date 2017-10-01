@@ -1,4 +1,4 @@
-package com.example.absolutelysaurabh.popularmovies_bottombar.viewHolder.more;
+package com.example.absolutelysaurabh.popularmovies_bottombar.adapter.more.viewHolder;
 
 import android.content.Context;
 import android.content.Intent;
@@ -42,16 +42,6 @@ public class MoreActivityViewHolder extends RecyclerView.ViewHolder {
 
         picture = itemView.findViewById(R.id.media_poster);
         title =  itemView.findViewById(R.id.media_title);
-       // releaseYear = itemView.findViewById(R.id.media_release_year);
-      //  like_button = itemView.findViewById(R.id.media_like_button);
 
-//        ImageButton share_button = itemView.findViewById(R.id.media_share_button);
-//        share_button.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v) {
-//
-//                Snackbar.make(v, "Sharing....", Snackbar.LENGTH_SHORT).show();
-//            }
-//        });
     }
 }
