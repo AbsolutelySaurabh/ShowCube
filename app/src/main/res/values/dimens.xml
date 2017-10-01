@@ -65,6 +65,9 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="text_margin">16dp</dimen>
 
+    <dimen name="profile_width">75dp</dimen>
+    <dimen name="profile_height">75dp</dimen>
 
+    <dimen name="logo_w_h">100dp</dimen>
 
 </resources>

@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
     defaultConfig {
-        applicationId "com.example.absolutelysaurabh.popularmovies_bottombar"
+        applicationId "com.appsomniac.showbox"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
@@ -29,6 +29,9 @@ dependencies {
 
     compile files('libs/YouTubeAndroidPlayerApi.jar')
 
+
+
+
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:support-vector-drawable:26.+'
@@ -43,8 +46,13 @@ dependencies {
     compile 'com.github.florent37:diagonallayout:1.0.6'
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
     compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-    testCompile 'junit:junit:4.12'
     compile 'com.loopj.android:android-async-http:1.4.9'
+    compile 'com.google.firebase:firebase-database:11.0.4'
+    compile 'com.google.firebase:firebase-core:11.0.4'
+    compile 'com.google.firebase:firebase-auth:11.0.4'
 
+    compile 'com.google.android.gms:play-services-auth:11.0.4'
+    testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
 }
+apply plugin: 'com.google.gms.google-services'

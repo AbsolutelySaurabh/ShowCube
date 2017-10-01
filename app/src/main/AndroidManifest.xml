@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.absolutelysaurabh.popularmovies_bottombar">
+    package="com.appsomniac.showbox">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/PopMovies">
         <activity
-            android:name=".base.SplashActivity"
+            android:name="com.appsomniac.showbox.base.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/PopMovies">
             <intent-filter>
@@ -22,14 +27,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".base.MainActivity"
+            android:name="com.appsomniac.showbox.base.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/PopMovies" />
         <activity
-            android:name=".activity.more.more.MoreActivity"
+            android:name="com.appsomniac.showbox.activity.more.more.MoreActivity"
             android:label="@string/title_activity_more"
             android:theme="@style/PopMovies" />
-        <activity android:name=".activity.more.singleMovie.SingleMovieActivity"></activity>
+        <activity android:name="com.appsomniac.showbox.activity.more.singleMovie.SingleMovieActivity" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity android:name="com.appsomniac.showbox.activity.more.LoginActivity" />
+        <activity android:name="com.appsomniac.showbox.activity.more.SignUpActivity" />
+        <activity android:name="com.appsomniac.showbox.activity.more.ResetPasswordActivity"></activity>
     </application>
 
 </manifest>

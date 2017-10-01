@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    tools:context="com.example.absolutelysaurabh.popularmovies_bottombar.base.SplashActivity">
+    tools:context="com.appsomniac.showbox.base.SplashActivity">
 
     <TextView
         android:layout_width="wrap_content"
