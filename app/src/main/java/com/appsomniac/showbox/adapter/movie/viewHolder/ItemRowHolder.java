@@ -10,14 +10,14 @@ public class ItemRowHolder extends RecyclerView.ViewHolder {
 
     public TextView itemTitle;
     public RecyclerView recycler_view_list;
-    public TextView textMore;
+    //public TextView textMore;
 
     public ItemRowHolder(View view) {
         super(view);
 
         this.itemTitle = (TextView) view.findViewById(R.id.itemTitle);
         this.recycler_view_list = (RecyclerView) view.findViewById(R.id.recycler_view_list);
-        this.textMore= (TextView) view.findViewById(R.id.more_text);
+        //this.textMore= (TextView) view.findViewById(R.id.more_text);
 
     }
 }

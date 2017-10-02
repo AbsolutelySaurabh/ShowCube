@@ -21,16 +21,16 @@
             />
 
 
-        <TextView
-            android:id="@+id/media_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Superman"
-            android:layout_gravity="center"
-            android:padding="2dp"
-            android:maxLines="2"
-            android:textSize="15sp"
-            />
+        <!--<TextView-->
+            <!--android:id="@+id/media_title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Superman"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:padding="2dp"-->
+            <!--android:maxLines="2"-->
+            <!--android:textSize="15sp"-->
+            <!--/>-->
 
     </LinearLayout>
 

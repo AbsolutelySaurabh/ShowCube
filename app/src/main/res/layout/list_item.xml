@@ -28,17 +28,17 @@
             android:textSize="18sp"
             />
 
-        <TextView
-            android:id="@+id/more_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_margin="10dp"
-            android:text="More"
-            android:textStyle="bold"
-            android:textColor="#2196F3"
-            android:textSize="@dimen/article_titles"
-            android:layout_alignParentRight="true" />
+        <!--<TextView-->
+            <!--android:id="@+id/more_text"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_margin="10dp"-->
+            <!--android:text="More"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="#2196F3"-->
+            <!--android:textSize="@dimen/article_titles"-->
+            <!--android:layout_alignParentRight="true" />-->
 
 
     </RelativeLayout>

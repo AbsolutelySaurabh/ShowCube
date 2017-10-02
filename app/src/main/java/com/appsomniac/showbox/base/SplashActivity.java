@@ -2,6 +2,7 @@ package com.appsomniac.showbox.base;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -31,11 +32,14 @@ import retrofit2.Response;
 public class SplashActivity extends Activity {
 
     // Splash screen timer
-    private static int SPLASH_TIME_OUT = 3000;
+    private static int SPLASH_TIME_OUT = 2000;
 
     private TextView mTextMessage;
     public static ArrayList<Movie_SectionDataModel> allMovieSampleData;
+    public static ArrayList<Movie_SectionDataModel> allMovieSampleData_afterDeletion;
+
     public static ArrayList<Tv_SectionDataModel> allTvSampleData;
+    public static ArrayList<Tv_SectionDataModel> allTvSampleData_afterDeletion;
     public static ArrayList<Movie> al_movie;
     public static ArrayList<Tv> al_tv;
 
@@ -46,9 +50,15 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
 
         allMovieSampleData = new ArrayList<Movie_SectionDataModel>();
+        allMovieSampleData_afterDeletion = new ArrayList<Movie_SectionDataModel>();
+
         allTvSampleData  =new ArrayList<>();
+        allTvSampleData_afterDeletion  =new ArrayList<>();
+
         al_movie = new ArrayList<>();
         al_tv = new ArrayList<>();
+
+        SharedPreferences.Editor editor = getSharedPreferences("user_data", MODE_PRIVATE).edit();
 
         getSetMovieFragmentUi();
         getSetTvFragmentUi();
@@ -87,6 +97,8 @@ public class SplashActivity extends Activity {
 
                // Log.e("DATA NOW_PLAYING: ", movies.get(0).getTitle());
 
+                //movies.subList(8, movies.size()).clear();
+
                 dm.setAllItemsInSection(movies);
                 allMovieSampleData.add(dm);
 
@@ -120,6 +132,7 @@ public class SplashActivity extends Activity {
                 movies = response.body().getResults();
 
                // Log.e("Data Top Rated...: ", movies.get(0).getTitle());
+                //movies.subList(8, movies.size()).clear();
 
                 dm.setAllItemsInSection(movies);
                 allMovieSampleData.add(dm);
@@ -155,6 +168,7 @@ public class SplashActivity extends Activity {
                 movies = response.body().getResults();
 
                 //Log.e("Data UPCOMING...: ", movies.get(0).getTitle());
+                //movies.subList(8, movies.size()).clear();
 
                 dm.setAllItemsInSection(movies);
                 allMovieSampleData.add(dm);
@@ -192,6 +206,7 @@ public class SplashActivity extends Activity {
                 movies = response.body().getResults();
 
                // Log.e("Data POPULAR...: ", movies.get(0).getTitle());
+                //movies.subList(8, movies.size()).clear();
 
                 dm.setAllItemsInSection(movies);
                 allMovieSampleData.add(dm);
@@ -226,6 +241,7 @@ public class SplashActivity extends Activity {
                 tvs = response.body().getResults();
 
                 Log.e("TV AIRING TODAY...: ", tvs.get(0).getTitle());
+                //tvs.subList(8, tvs.size()).clear();
 
                 dm.setAllItemsInSection(tvs);
                 allTvSampleData.add(dm);
@@ -257,6 +273,8 @@ public class SplashActivity extends Activity {
 
                 ArrayList<Tv> tvs;
                 tvs = response.body().getResults();
+
+                //tvs.subList(8, tvs.size()).clear();
 
                 dm.setAllItemsInSection(tvs);
                 allTvSampleData.add(dm);
@@ -290,6 +308,8 @@ public class SplashActivity extends Activity {
                 ArrayList<Tv> tvs;
                 tvs = response.body().getResults();
 
+               // tvs.subList(8, tvs.size()).clear();
+
                 dm.setAllItemsInSection(tvs);
                 allTvSampleData.add(dm);
 
@@ -321,6 +341,8 @@ public class SplashActivity extends Activity {
 
                 ArrayList<Tv> tvs;
                 tvs = response.body().getResults();
+
+               // tvs.subList(8, tvs.size()).clear();
 
                 dm.setAllItemsInSection(tvs);
                 allTvSampleData.add(dm);

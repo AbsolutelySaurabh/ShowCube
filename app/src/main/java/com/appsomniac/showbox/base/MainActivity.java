@@ -1,6 +1,7 @@
 package com.appsomniac.showbox.base;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,8 +16,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.appsomniac.showbox.R;
 import com.appsomniac.showbox.activity.more.LoginActivity;
@@ -24,6 +31,8 @@ import com.appsomniac.showbox.fragments.MovieFragment;
 import com.appsomniac.showbox.fragments.NearbyFragment;
 import com.appsomniac.showbox.fragments.PersonalFragment;
 import com.appsomniac.showbox.fragments.TvFragment;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.roughike.bottombar.BottomBar;
@@ -39,17 +48,56 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected DrawerLayout drawerLayout;
     public static String TAG = "Movie";
     BottomBar bottomBar;
+    public static final String ANONYMOUS = "anonymous";
 
     // Firebase instance variables
     private FirebaseAuth mFirebaseAuth;
     private FirebaseUser mFirebaseUser;
     private String mUsername;
-
+    View navHeader;
+    NavigationView nav;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        if(photoUrl!=null && user_name!=null) {
+//            nav = (NavigationView) findViewById(R.id.navigation);
+//            navHeader = nav.inflateHeaderView(R.layout.header);
+//        }
+
+        nav = ( NavigationView ) findViewById( R.id.navigation );
+
+        if( nav != null ){
+            LinearLayout mParent = ( LinearLayout ) nav.getHeaderView( 0 );
+
+            if( mParent != null ){
+                // Set your values to the image and text view by declaring and setting as you need to here.
+
+                SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
+                String photoUrl = prefs.getString("photo_url", null);
+                String user_name = prefs.getString("name", "User");
+
+                if(photoUrl!=null) {
+                    Log.e("Photo Url: ", photoUrl);
+
+                    TextView userName = mParent.findViewById(R.id.user_name);
+                    userName.setText(user_name);
+
+                    ImageView user_imageView = mParent.findViewById(R.id.avatar);
+
+                    RequestOptions requestOptions = new RequestOptions();
+                    requestOptions.placeholder(R.drawable.ic_user_24dp);
+                    requestOptions.error(R.drawable.ic_user_24dp);
+
+                    Glide.with(this).load(photoUrl)
+                            .apply(requestOptions).thumbnail(0.5f).into(user_imageView);
+
+                }
+
+            }
+        }
 
         // Initialize Firebase Auth
         mFirebaseAuth = FirebaseAuth.getInstance();
@@ -128,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             }
         });
+
 
     }
 
@@ -227,6 +276,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finishAffinity();
         }
         finish();
+    }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.sign_out_menu:
+                mFirebaseAuth.signOut();
+                //Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+                mUsername = ANONYMOUS;
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

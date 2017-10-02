@@ -32,7 +32,7 @@ public class SectionItemRowHolder extends RecyclerView.ViewHolder {
 
         super(inflater.inflate(R.layout.list_single_card, parent, false));
 
-        this.tvTitle = itemView.findViewById(R.id.media_title);
+        //this.tvTitle = itemView.findViewById(R.id.media_title);
         this.itemImage = itemView.findViewById(R.id.media_poster);
         this.single_position = single_position;
 
@@ -45,7 +45,7 @@ public class SectionItemRowHolder extends RecyclerView.ViewHolder {
                 String movieId = String.valueOf(itemsList.get(getAdapterPosition()).getId());
                 intent.putExtra("movieId", movieId);
                 intent.putExtra("videoId", VIDEO_ID);
-                intent.putExtra("movieORtv", "movie");
+                intent.putExtra("movieORtvORrecommended", "movie");
                 intent.putExtra("sectionPosition", sectionPosition);
                 intent.putExtra("itemPosition", getAdapterPosition());
                 itemView.getContext().startActivity(intent);

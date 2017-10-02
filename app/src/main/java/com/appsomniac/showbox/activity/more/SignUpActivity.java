@@ -2,6 +2,7 @@ package com.appsomniac.showbox.activity.more;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -46,7 +47,6 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
     private FirebaseAuth mFirebaseAuth;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +54,6 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
 
         // Initialize FirebaseAuth
         mFirebaseAuth = FirebaseAuth.getInstance();
-
-        /////
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -65,14 +63,6 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        btnResetPassword = (Button) findViewById(R.id.btn_reset_password);
-
-        btnResetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(SignUpActivity.this, ResetPasswordActivity.class));
-            }
-        });
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,10 +139,17 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
         if (authResult != null) {
             // Welcome the user
             FirebaseUser user = authResult.getUser();
-            Toast.makeText(this, "Welcome " + user.getEmail(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Welcome " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
 
+            SharedPreferences.Editor editor = getSharedPreferences("user_data", MODE_PRIVATE).edit();
+            editor.putString("name", user.getDisplayName());
+            editor.putString("email", user.getEmail());
+            editor.putString("contact", user.getPhoneNumber());
+            editor.putString("photo_url", String.valueOf(user.getPhotoUrl()));
+            editor.apply();
             // Go back to the main activity
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
     }
 
@@ -170,6 +167,10 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.clearDefaultAccountAndReconnect();
+        }
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
@@ -208,8 +209,10 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
                             Toast.makeText(SignUpActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
-                            finish();
+//                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
+//                            finish();
+                            handleFirebaseAuthResult(task.getResult());
+
                         }
                     }
                 });

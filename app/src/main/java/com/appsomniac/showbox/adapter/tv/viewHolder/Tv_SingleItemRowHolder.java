@@ -25,7 +25,7 @@ public class Tv_SingleItemRowHolder extends RecyclerView.ViewHolder {
 
         super(inflater.inflate(R.layout.list_single_card, parent, false));
 
-        this.tvTitle = itemView.findViewById(R.id.media_title);
+        //this.tvTitle = itemView.findViewById(R.id.media_title);
         this.itemImage = itemView.findViewById(R.id.media_poster);
         this.single_position = single_position;
 
@@ -36,7 +36,7 @@ public class Tv_SingleItemRowHolder extends RecyclerView.ViewHolder {
                 Intent intent = new Intent(itemView.getContext(), SingleMovieActivity.class);
                 String tvId = String.valueOf(itemsList.get(getAdapterPosition()).getId());
                 intent.putExtra("tvId", tvId);
-                intent.putExtra("movieORtv", "tv");
+                intent.putExtra("movieORtvORrecommended", "tv");
                 intent.putExtra("sectionPosition", sectionPosition);
                 Log.e("POSITION:: ", String.valueOf(getAdapterPosition()));
                 intent.putExtra("itemPosition", getAdapterPosition());

@@ -26,7 +26,7 @@ public class MoreActivityViewHolder extends RecyclerView.ViewHolder {
         this.position = position;
 
         picture = itemView.findViewById(R.id.media_poster);
-        title =  itemView.findViewById(R.id.media_title);
+        //title =  itemView.findViewById(R.id.media_title);
 
     }
 }

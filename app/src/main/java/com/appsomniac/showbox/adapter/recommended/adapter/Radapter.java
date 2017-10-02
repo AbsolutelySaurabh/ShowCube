@@ -39,7 +39,12 @@ public class Radapter extends RecyclerView.Adapter<RviewHolder> {
 
     @Override
     public RviewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new RviewHolder(LayoutInflater.from(parent.getContext()), parent);
+
+        if(al_tv.size()==0) {
+            return new RviewHolder(LayoutInflater.from(parent.getContext()), parent, al_movies);
+        }else{
+            return new RviewHolder(LayoutInflater.from(parent.getContext()), al_tv, parent);
+        }
     }
 
     @Override

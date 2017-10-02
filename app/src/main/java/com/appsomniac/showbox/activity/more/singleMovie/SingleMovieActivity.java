@@ -62,8 +62,8 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
 
         al_video_urls  =new ArrayList<>();
 
-        String movieORtv = getIntent().getStringExtra("movieORtv");
-        if(movieORtv.equals("movie")){
+        String movieORtvORrecommended = getIntent().getStringExtra("movieORtvORrecommended");
+        if(movieORtvORrecommended.equals("movie")){
 
             int sectionPosition = getIntent().getIntExtra("sectionPosition", 1);
             int itemPosition = getIntent().getIntExtra("itemPosition", 1);
@@ -74,7 +74,7 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
 
             String title  = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getTitle();
             String overview = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getOverview();
-            String rating = String.valueOf(SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getPopularity());
+            String rating = String.valueOf(SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getVoteAverage());
             String release_date = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getReleaseDate();
             String imageUrl = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getPosterPath();
 
@@ -100,7 +100,7 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
             getRecommeddedMovies(movieId);
 
         }else
-            if(movieORtv.equals("tv")){
+            if(movieORtvORrecommended.equals("tv")){
 
                 String tvId = getIntent().getStringExtra("tvId");
                 int sectionPosition = getIntent().getIntExtra("sectionPosition", 0);
@@ -133,7 +133,96 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
                         .apply(requestOptions).thumbnail(0.5f).into(media_poster);
 
                 getRecommeddedTvs(tvId);
-            }
+            }else
+                if(movieORtvORrecommended.equals("recommended_movie")){
+
+                    //ArrayList<Movie> al_movies = (ArrayList<Movie>)getIntent().getSerializableExtra("al_movies_recommended");
+                    //int position = getIntent().getIntExtra("itemPosition", 0);
+
+                    String overView = getIntent().getStringExtra("movieOverView");
+                    String rating = getIntent().getStringExtra("movieRating");
+                    String release_date = getIntent().getStringExtra("movieReleaseDate");
+                    String posterUrl = getIntent().getStringExtra("moviePosterUrl");
+                    String movieId = getIntent().getStringExtra("movieId");
+
+                    VIDEO_URL = Config.Youtube_tv_get_video_url_part_1 + movieId + Config.Youtube_get_video_url_part_2;
+                    getVideoMovie((movieId));
+
+//                    String overView = al_movies.get(position).getOverview();
+//                    String title = al_movies.get(position).getTitle();
+//                    String rating = String.valueOf(al_movies.get(position).getVoteAverage());
+//                    String release_date = al_movies.get(position).getReleaseDate();
+//                    String posterUrl = al_movies.get(position).getPosterPath();
+
+
+                    TextView overviewView = (TextView) this.findViewById(R.id.media_overview);
+                    TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
+                    TextView ratingView = (TextView) this.findViewById(R.id.media_rating);
+                    ImageView media_poster = (ImageView) this.findViewById(R.id.media_poster);
+
+
+                    //titleView.setText(title);
+                    overviewView.setText(overView);
+                    dateView.setText(release_date);
+                    ratingView.setText(rating);
+
+                    String posterBaseUrl = "http://image.tmdb.org/t/p/w185/"+ posterUrl;
+                    RequestOptions requestOptions = new RequestOptions();
+                    requestOptions.placeholder(R.drawable.superman);
+                    requestOptions.error(R.drawable.superman);
+
+                    Glide.with(this).load(posterBaseUrl)
+                            .apply(requestOptions).thumbnail(0.5f).into(media_poster);
+
+                    getRecommeddedMovies(String.valueOf(movieId));
+
+                }else
+                    if(movieORtvORrecommended.equals("recommended_tv")) {
+
+
+                        {
+
+                            //ArrayList<Tv> al_tv = (ArrayList<Tv>) getIntent().getSerializableExtra("al_tv_recommended");
+                           // int position = getIntent().getIntExtra("itemPosition", 0);
+
+                            String overView = getIntent().getStringExtra("tvOverview");
+                            String rating = getIntent().getStringExtra("tvRating");
+                            String posterUrl = getIntent().getStringExtra("tvPosterUrl");
+                            String tvId = getIntent().getStringExtra("tvId");
+
+                            VIDEO_URL = Config.Youtube_tv_get_video_url_part_1 + tvId + Config.Youtube_get_video_url_part_2;
+                            getVideoTv(tvId);
+
+//                            String overView = al_tv.get(position).getOverview();
+//                            String title = al_tv.get(position).getTitle();
+//                            String rating = String.valueOf(al_tv.get(position).getVoteAverage());
+//                            String posterUrl = al_tv.get(position).getPosterPath();
+
+
+                            TextView overviewView = (TextView) this.findViewById(R.id.media_overview);
+//                            TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
+                            TextView ratingView = (TextView) this.findViewById(R.id.media_rating);
+                            ImageView media_poster = (ImageView) this.findViewById(R.id.media_poster);
+
+
+                            //titleView.setText(title);
+                            overviewView.setText(overView);
+//                            dateView.setText(release_date);
+                            ratingView.setText(rating);
+
+                            String posterBaseUrl = "http://image.tmdb.org/t/p/w185/" + posterUrl;
+                            RequestOptions requestOptions = new RequestOptions();
+                            requestOptions.placeholder(R.drawable.superman);
+                            requestOptions.error(R.drawable.superman);
+
+                            Glide.with(this).load(posterBaseUrl)
+                                    .apply(requestOptions).thumbnail(0.5f).into(media_poster);
+
+                            getRecommeddedMovies(tvId);
+
+
+                        }
+                    }
     }
 
     @Override

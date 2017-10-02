@@ -47,36 +47,36 @@ public class Tv_RecyclerViewDataAdapter extends RecyclerView.Adapter<Tv_ItemRowH
         itemRowHolder.recycler_view_list.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         itemRowHolder.recycler_view_list.setAdapter(itemListDataAdapter);
 
-        itemRowHolder.textMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(mContext, MoreActivity.class);
-
-                if(sectionName.equals("Top Rated")){
-                    intent.putExtra(EXTRA_MESSAGE, "topRated");
-                    intent.putExtra("position", position);
-
-                }else
-                    if(sectionName.equals("Upcoming")){
-                        intent.putExtra(EXTRA_MESSAGE, "upcoming");
-                        intent.putExtra("position", (position));
-                    }else
-                        if(sectionName.equals("Now Playing")){
-                            intent.putExtra(EXTRA_MESSAGE, "nowPlaying");
-                            intent.putExtra("position", (position));
-
-                        }else
-                            if(sectionName.equals("Popular")){
-                                intent.putExtra(EXTRA_MESSAGE, "popular");
-                                intent.putExtra("position", (position));
-
-                            }
-
-                mContext.startActivity(intent);
-
-            }
-        });
+//        itemRowHolder.textMore.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                Intent intent = new Intent(mContext, MoreActivity.class);
+//
+//                if(sectionName.equals("Top Rated")){
+//                    intent.putExtra(EXTRA_MESSAGE, "topRated");
+//                    intent.putExtra("position", position);
+//
+//                }else
+//                    if(sectionName.equals("Upcoming")){
+//                        intent.putExtra(EXTRA_MESSAGE, "upcoming");
+//                        intent.putExtra("position", (position));
+//                    }else
+//                        if(sectionName.equals("Now Playing")){
+//                            intent.putExtra(EXTRA_MESSAGE, "nowPlaying");
+//                            intent.putExtra("position", (position));
+//
+//                        }else
+//                            if(sectionName.equals("Popular")){
+//                                intent.putExtra(EXTRA_MESSAGE, "popular");
+//                                intent.putExtra("position", (position));
+//
+//                            }
+//
+//                mContext.startActivity(intent);
+//
+//            }
+//        });
 
     }
     @Override

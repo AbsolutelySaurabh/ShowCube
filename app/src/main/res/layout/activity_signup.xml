@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="16dp">
@@ -68,19 +68,20 @@
             android:textColor="@android:color/black"
             android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/btn_reset_password"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dip"
-            android:background="@null"
-            android:text="@string/btn_forgot_password"
-            android:textAllCaps="false"
-            android:textColor="@color/colorAccent" />
+        <!--<Button-->
+            <!--android:id="@+id/btn_reset_password"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="20dip"-->
+            <!--android:background="@null"-->
+            <!--android:text="@string/btn_forgot_password"-->
+            <!--android:textAllCaps="false"-->
+            <!--android:textColor="@color/colorAccent" />-->
 
         <com.google.android.gms.common.SignInButton
             android:id="@+id/google_sign_in_button"
             android:layout_width="200dp"
+            android:layout_marginTop="30dp"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="visible"

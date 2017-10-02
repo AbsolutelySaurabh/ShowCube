@@ -1,6 +1,7 @@
 package com.appsomniac.showbox.activity.more;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -46,8 +47,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        ///////////////////////////////////via email
 
         inputEmail = (EditText) findViewById(R.id.email);
         inputPassword = (EditText) findViewById(R.id.password);
@@ -138,10 +137,18 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (authResult != null) {
             // Welcome the user
             FirebaseUser user = authResult.getUser();
-            Toast.makeText(this, "Welcome " + user.getEmail(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Welcome " + user.getDisplayName(), Toast.LENGTH_SHORT).show();
+
+            SharedPreferences.Editor editor = getSharedPreferences("user_data", MODE_PRIVATE).edit();
+            editor.putString("name", user.getDisplayName());
+            editor.putString("email", user.getEmail());
+            editor.putString("contact", user.getPhoneNumber());
+            editor.putString("photo_url", String.valueOf(user.getPhotoUrl()));
+            editor.apply();
 
             // Go back to the main activity
             startActivity(new Intent(this, MainActivity.class));
+            finish();
         }
     }
 
@@ -159,6 +166,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
+            mGoogleApiClient.clearDefaultAccountAndReconnect();
+        }
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
@@ -187,18 +198,21 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+
+                        Log.e(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
+                            Log.e(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
+
+                            handleFirebaseAuthResult(task.getResult());
+                            //startActivity(new Intent(LoginActivity.this, MainActivity.class));
+//                            finish();
                         }
                     }
                 });
