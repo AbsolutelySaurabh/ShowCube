@@ -32,6 +32,7 @@ dependencies {
 
 
 
+
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:support-vector-drawable:26.+'
@@ -51,8 +52,8 @@ dependencies {
     compile 'com.google.firebase:firebase-core:11.0.4'
     compile 'com.google.firebase:firebase-auth:11.0.4'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-
     compile 'com.google.android.gms:play-services-auth:11.0.4'
+    compile 'com.google.android.gms:play-services-maps:11.0.4'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
 }
