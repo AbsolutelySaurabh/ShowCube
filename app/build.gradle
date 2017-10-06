@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.appsomniac.showbox"
         minSdkVersion 15
-        targetSdkVersion 26
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -54,7 +54,9 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.google.android.gms:play-services-auth:11.0.4'
     compile 'com.google.android.gms:play-services-maps:11.0.4'
+    compile 'com.google.android.gms:play-services-location:11.0.4'
     testCompile 'junit:junit:4.12'
+
     annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
 }
 apply plugin: 'com.google.gms.google-services'

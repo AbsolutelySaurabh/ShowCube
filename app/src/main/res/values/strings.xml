@@ -119,7 +119,12 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="quotedesc">Welcome! Where should we deliver to?</string>
 
+    <string name="pause">Pause Location Updates</string>
+    <string name="resume">Resume Location Updates</string>
+
+    <string name="hello_world">Hello world!</string>
 
     <string name="sign_out">Sign Out</string>
     <string name="send_button_label">Send</string>

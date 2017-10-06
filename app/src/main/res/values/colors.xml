@@ -6,6 +6,16 @@
     <color name="colorFavorite">#ffeb3b</color>
     <color name="colorGray">#f5f5f5</color>
 
+    <color name="colorBlue">#2D9CDB</color>
+    <color name="colorBlueDark">#2992CD</color>
+    <color name="colorBlueDarkest">#212121</color>
+
+    <color name="primary_text">#212121</color>
+    <color name="secondary_text">#727272</color>
+
+    <color name="proceed_disable">#DEDEDE</color>
+    <color name="proceed_enable">#72D63A</color>
+
     <color name="colorTvShows">#00695c</color>
     <color name="colorMovies">#ff6f00</color>
     <color name="colorReveal">#42a5f5</color>
