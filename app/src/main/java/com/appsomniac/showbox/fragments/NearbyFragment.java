@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,7 +26,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.appsomniac.showbox.R;
+import com.appsomniac.showbox.activity.more.TheatreActivity;
+import com.appsomniac.showbox.adapter.theatre.TheatreAdapter;
 import com.appsomniac.showbox.base.MainActivity;
+import com.appsomniac.showbox.config.nearby.PlaceApiClient;
+import com.appsomniac.showbox.config.nearby.PlaceApiInterface;
+import com.appsomniac.showbox.config.nearby.PlaceApiResponse;
+import com.appsomniac.showbox.model.nearby.PlaceApi;
+import com.appsomniac.showbox.model.nearby.Theatre;
+import com.appsomniac.showbox.other.Config;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -33,8 +42,15 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,7 +75,7 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
     ProgressBar locationProgress;
 
     public static double latitude, longitude;
-
+    public static ArrayList<PlaceApi> al_theatres;
     // LogCat tag
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -81,7 +97,7 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
     private static int DISPLACEMENT = 10; // 10 meters
 
 
-    public static String currentLocation="";
+    public static String currentLocation = "";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -127,7 +143,7 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         nearbyFragment = inflater.inflate(R.layout.fragment_nearby, container, false);
-        locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
         btnProceed = nearbyFragment.findViewById(R.id.btnLocation);
         tvAddress = nearbyFragment.findViewById(R.id.tvAddress);
@@ -150,23 +166,30 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
                     tvEmpty.setVisibility(View.VISIBLE);
                     return;
                 } else {
-
                     rlPick.setEnabled(false);
-                   // displayLocation();
-
+                     displayLocation();
                 }
             }
 
         });
 
+        btnProceed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getActivity(), TheatreActivity.class);
+                intent.putExtra("al_ids", al_theatres);
+
+                startActivity(intent);
+            }
+        });
 
         return nearbyFragment;
     }
 
-
     /**
      * Method to display the location on UI
-     * */
+     */
     private void displayLocation() {
 
         mLastLocation = LocationServices.FusedLocationApi
@@ -177,6 +200,9 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
             longitude = mLastLocation.getLongitude();
 
             getAddress();
+            //get the Theatre list id's at a particular latitude and longitude.
+            getPlaceApiResponse(String.valueOf(latitude),String.valueOf(longitude));
+
 
         } else {
 
@@ -187,7 +213,7 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
 
     /**
      * Creating google api client object
-     * */
+     */
     protected synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addConnectionCallbacks(this)
@@ -197,7 +223,7 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
 
     /**
      * Method to verify google play services on the device
-     * */
+     */
     private boolean checkPlayServices() {
         int resultCode = GooglePlayServicesUtil
                 .isGooglePlayServicesAvailable(getActivity());
@@ -254,7 +280,7 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
 
 
     private boolean checkLocation() {
-        if(!isLocationEnabled())
+        if (!isLocationEnabled())
             showAlert();
         return isLocationEnabled();
     }
@@ -285,89 +311,115 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
     }
 
 
-    public void getAddress(){
+    public void getAddress() {
 
-            Address locationAddress;
-            locationAddress=getAddressExact(latitude, longitude);
+        Address locationAddress;
+        locationAddress = getAddressExact(latitude, longitude);
 
-            if(locationAddress!=null)
-            {
+        if (locationAddress != null) {
 
-                String address = locationAddress.getAddressLine(0);
-                String address1 = locationAddress.getAddressLine(1);
-                String city = locationAddress.getLocality();
-                String state = locationAddress.getAdminArea();
-                String country = locationAddress.getCountryName();
-                String postalCode = locationAddress.getPostalCode();
+            String address = locationAddress.getAddressLine(0);
+            String address1 = locationAddress.getAddressLine(1);
+            String city = locationAddress.getLocality();
+            String state = locationAddress.getAdminArea();
+            String country = locationAddress.getCountryName();
+            String postalCode = locationAddress.getPostalCode();
 
-                if(!TextUtils.isEmpty(address))
-                {
-                    currentLocation=address;
+            if (!TextUtils.isEmpty(address)) {
+                currentLocation = address;
 
-                    if (!TextUtils.isEmpty(address1))
-                        currentLocation+="\n"+address1;
+                if (!TextUtils.isEmpty(address1))
+                    currentLocation += "\n" + address1;
 
-                    if (!TextUtils.isEmpty(city))
-                    {
-                        currentLocation+="\n"+city;
+                if (!TextUtils.isEmpty(city)) {
+                    currentLocation += "\n" + city;
 
-                        if (!TextUtils.isEmpty(postalCode))
-                            currentLocation+=" - "+postalCode;
-                    }
-                    else
-                    {
-                        if (!TextUtils.isEmpty(postalCode))
-                            currentLocation+="\n"+postalCode;
-                    }
-
-                    if (!TextUtils.isEmpty(state))
-                        currentLocation+="\n"+state;
-
-                    if (!TextUtils.isEmpty(country))
-                        currentLocation+="\n"+country;
-
-                    btnProceed.setEnabled(true);
-                    tvEmpty.setVisibility(View.GONE);
-                    locationProgress.setVisibility(View.GONE);
-                    tvAddress.setText(currentLocation);
-                    tvAddress.setVisibility(View.VISIBLE);
-
-                    if(!btnProceed.isEnabled())
-                        btnProceed.setEnabled(true);
-
+                    if (!TextUtils.isEmpty(postalCode))
+                        currentLocation += " - " + postalCode;
+                } else {
+                    if (!TextUtils.isEmpty(postalCode))
+                        currentLocation += "\n" + postalCode;
                 }
 
+                if (!TextUtils.isEmpty(state))
+                    currentLocation += "\n" + state;
+
+                if (!TextUtils.isEmpty(country))
+                    currentLocation += "\n" + country;
+
+                tvEmpty.setVisibility(View.GONE);
+                locationProgress.setVisibility(View.GONE);
+                tvAddress.setText(currentLocation);
+                tvAddress.setVisibility(View.VISIBLE);
+
+                if (!btnProceed.isEnabled())
+                    btnProceed.setEnabled(true);
+
             }
-            else
-                showToast("Something went wrong");
-        }
+
+        } else
+            showToast("Something went wrong");
+    }
 
 
     public Address getAddressExact(double latitude, double longitude) {
-            Geocoder geocoder = null;
-            List<Address> addresses;
+        Geocoder geocoder = null;
+        List<Address> addresses;
 
-            try {
-                geocoder = new Geocoder(getActivity(), Locale.getDefault());
-            }catch(NullPointerException e){
-                e.printStackTrace();
-            }
+        try {
+            geocoder = new Geocoder(getActivity(), Locale.getDefault());
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
 
-            try {
-                addresses = geocoder.getFromLocation(latitude,longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
-                return addresses.get(0);
+        try {
+            addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
+            return addresses.get(0);
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-            return null;
+        return null;
 
     }
 
-    public void showToast(String message)
-    {
-        Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+    public void getPlaceApiResponse(String latitude, String longitude){
+
+        PlaceApiInterface apiService = PlaceApiClient.getClient().create(PlaceApiInterface.class);
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("location",latitude+","+longitude);
+        params.put("radius", String.valueOf(5000));
+        params.put("type", "movie_theater");
+        params.put("key", Config.Places_api_key);
+
+        Call<PlaceApiResponse> call = apiService.getNearbyTheatres(params);
+
+        call.enqueue(new Callback<PlaceApiResponse>() {
+            @Override
+            public void onResponse(Call<PlaceApiResponse>call, Response<PlaceApiResponse> response) {
+
+                //In this arrayList we have the id's of the particular theatres.
+                al_theatres = response.body().getResults();
+                Log.e("Theatre Ids al: ", String.valueOf(al_theatres.size()));
+                btnProceed.setEnabled(true);
+
+
+            }
+            @Override
+            public void onFailure(Call<PlaceApiResponse>call, Throwable t) {
+                // Log error here since request failed
+                Log.e("FAILURE: ", t.toString());
+            }
+        });
+    }
+
+
+
+
+    public void showToast(String message) {
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -376,4 +428,3 @@ public class NearbyFragment extends Fragment implements GoogleApiClient.Connecti
         void onFragmentInteraction(Uri uri);
     }
 }
-

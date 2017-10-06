@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:padding="5dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.appsomniac.showbox.fragments.NearbyFragment">
+
+    <!--<include-->
+        <!--layout="@layout/theatre_activity_toolbar_layout"-->
+
+        <!--/>-->
+
+    <android.support.design.widget.AppBarLayout
+        app:layout_behavior=".view.ScrollBehavior"
+        android:layout_width="match_parent"
+        android:layout_margin="3dp"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/theatre_activity_toolbar"
+            android:background="@color/colorBlue"
+            app:titleTextAppearance="@style/Widget.ToolbarText"
+            app:layout_scrollFlags="scroll|enterAlways"
+            android:layout_width="match_parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:layout_height="?attr/actionBarSize"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="58dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginLeft="3dp"
+        android:id="@+id/theatre_recycler_view"
+        android:nestedScrollingEnabled="true"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" />
+
+</FrameLayout>
+
+
