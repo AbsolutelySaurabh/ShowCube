@@ -5,6 +5,13 @@
     android:fitsSystemWindows="true"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_marginBottom="100dp"
+        >
+
     <LinearLayout
         android:id="@+id/header"
         android:orientation="vertical"
@@ -140,8 +147,9 @@
         android:id="@+id/btnLocation"
         android:fitsSystemWindows="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
         android:layout_centerHorizontal="true"
         android:text="PROCEED" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

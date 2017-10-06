@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/PopMovies">
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <activity
             android:name=".base.SplashActivity"
@@ -34,14 +37,7 @@
         <activity
             android:name=".base.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/PopMovies" >
-
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        </activity>
+            android:theme="@style/PopMovies" />
         <activity
             android:name=".activity.more.more.MoreActivity"
             android:label="@string/title_activity_more"

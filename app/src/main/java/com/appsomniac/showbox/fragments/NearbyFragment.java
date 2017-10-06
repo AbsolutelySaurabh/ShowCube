@@ -4,11 +4,9 @@ package com.appsomniac.showbox.fragments;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -28,15 +26,15 @@ import android.widget.Toast;
 
 import com.appsomniac.showbox.R;
 import com.appsomniac.showbox.base.MainActivity;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
-
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -46,7 +44,8 @@ import static android.content.Context.MODE_PRIVATE;
  * Use the {@link NearbyFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NearbyFragment extends Fragment {
+public class NearbyFragment extends Fragment implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -59,6 +58,29 @@ public class NearbyFragment extends Fragment {
     RelativeLayout rlPick;
     ProgressBar locationProgress;
 
+    public static double latitude, longitude;
+
+    // LogCat tag
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    private final static int PLAY_SERVICES_RESOLUTION_REQUEST = 1000;
+
+    private Location mLastLocation;
+
+    // Google client to interact with Google API
+    private GoogleApiClient mGoogleApiClient;
+
+    // boolean flag to toggle periodic location updates
+    private boolean mRequestingLocationUpdates = false;
+
+    private LocationRequest mLocationRequest;
+
+    // Location updates intervals in sec
+    private static int UPDATE_INTERVAL = 10000; // 10 sec
+    private static int FATEST_INTERVAL = 5000; // 5 sec
+    private static int DISPLACEMENT = 10; // 10 meters
+
+
     public static String currentLocation="";
 
     // TODO: Rename and change types of parameters
@@ -68,7 +90,6 @@ public class NearbyFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
 
     LocationManager locationManager;
-    double longitudeGPS, latitudeGPS;
 
     public NearbyFragment() {
         // Required empty public constructor
@@ -114,6 +135,12 @@ public class NearbyFragment extends Fragment {
         rlPick = nearbyFragment.findViewById(R.id.rlPickLocation);
         locationProgress = nearbyFragment.findViewById(R.id.locationProgress);
 
+        // First we need to check availability of play services
+        if (checkPlayServices()) {
+
+            buildGoogleApiClient();
+        }
+
         rlPick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,25 +149,109 @@ public class NearbyFragment extends Fragment {
 
                     tvEmpty.setVisibility(View.VISIBLE);
                     return;
-                }
+                } else {
 
-                if(currentLocation.length()==0) {
-                    tvEmpty.setVisibility(View.GONE);
-                    locationProgress.setVisibility(View.VISIBLE);
-                    locationManager.requestLocationUpdates(
-                            LocationManager.GPS_PROVIDER, 2 * 60 * 1000, 10, locationListenerGPS);
-                }else{
-                    tvEmpty.setVisibility(View.GONE);
-                    tvAddress.setText(currentLocation);
-                    tvAddress.setVisibility(View.VISIBLE);
-                }
+                    rlPick.setEnabled(false);
+                   // displayLocation();
 
+                }
             }
+
         });
 
 
         return nearbyFragment;
     }
+
+
+    /**
+     * Method to display the location on UI
+     * */
+    private void displayLocation() {
+
+        mLastLocation = LocationServices.FusedLocationApi
+                .getLastLocation(mGoogleApiClient);
+
+        if (mLastLocation != null) {
+            latitude = mLastLocation.getLatitude();
+            longitude = mLastLocation.getLongitude();
+
+            getAddress();
+
+        } else {
+
+            showToast("(Couldn't get the location. Make sure location is enabled on the device)");
+        }
+    }
+
+
+    /**
+     * Creating google api client object
+     * */
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API).build();
+    }
+
+    /**
+     * Method to verify google play services on the device
+     * */
+    private boolean checkPlayServices() {
+        int resultCode = GooglePlayServicesUtil
+                .isGooglePlayServicesAvailable(getActivity());
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultCode)) {
+                GooglePlayServicesUtil.getErrorDialog(resultCode, getActivity(),
+                        PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            } else {
+                Toast.makeText(getContext(),
+                        "This device is not supported.", Toast.LENGTH_LONG)
+                        .show();
+                getActivity().finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.connect();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        checkPlayServices();
+    }
+
+    /**
+     * Google api callback methods
+     */
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = "
+                + result.getErrorCode());
+    }
+
+    @Override
+    public void onConnected(Bundle arg0) {
+
+        // Once connected with google api, get the location
+        displayLocation();
+    }
+
+    @Override
+    public void onConnectionSuspended(int arg0) {
+        mGoogleApiClient.connect();
+    }
+
 
     private boolean checkLocation() {
         if(!isLocationEnabled())
@@ -173,24 +284,11 @@ public class NearbyFragment extends Fragment {
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
-    private final LocationListener locationListenerGPS = new LocationListener() {
-        public void onLocationChanged(Location location) {
-            longitudeGPS = location.getLongitude();
-            latitudeGPS = location.getLatitude();
 
-            tvEmpty.setVisibility(View.GONE);
-
-            getAddress();
-            if(!btnProceed.isEnabled())
-                btnProceed.setEnabled(true);
-
-        }
-
-
-        public void getAddress(){
+    public void getAddress(){
 
             Address locationAddress;
-            locationAddress=getAddressExact(latitudeGPS, longitudeGPS);
+            locationAddress=getAddressExact(latitude, longitude);
 
             if(locationAddress!=null)
             {
@@ -228,6 +326,8 @@ public class NearbyFragment extends Fragment {
                     if (!TextUtils.isEmpty(country))
                         currentLocation+="\n"+country;
 
+                    btnProceed.setEnabled(true);
+                    tvEmpty.setVisibility(View.GONE);
                     locationProgress.setVisibility(View.GONE);
                     tvAddress.setText(currentLocation);
                     tvAddress.setVisibility(View.VISIBLE);
@@ -243,11 +343,15 @@ public class NearbyFragment extends Fragment {
         }
 
 
-        public Address getAddressExact(double latitude, double longitude)
-        {
-            Geocoder geocoder;
+    public Address getAddressExact(double latitude, double longitude) {
+            Geocoder geocoder = null;
             List<Address> addresses;
-            geocoder = new Geocoder(getActivity(), Locale.getDefault());
+
+            try {
+                geocoder = new Geocoder(getActivity(), Locale.getDefault());
+            }catch(NullPointerException e){
+                e.printStackTrace();
+            }
 
             try {
                 addresses = geocoder.getFromLocation(latitude,longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
@@ -259,24 +363,7 @@ public class NearbyFragment extends Fragment {
 
             return null;
 
-        }
-
-        @Override
-        public void onStatusChanged(String s, int i, Bundle bundle) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String s) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String s) {
-
-        }
-    };
-
+    }
 
     public void showToast(String message)
     {
@@ -284,9 +371,9 @@ public class NearbyFragment extends Fragment {
     }
 
 
-
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }
+
