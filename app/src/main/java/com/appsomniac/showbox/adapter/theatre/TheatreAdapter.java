@@ -110,7 +110,7 @@ public class TheatreAdapter extends RecyclerView.Adapter<TheatreViewHolder> impl
 
                     for (PlaceApi places : al_theatre) {
 
-                        if (places.getTheatre_name().toLowerCase().contains(charString) || places.getTheatre_Address().toLowerCase().contains(charString) || places.getTheatre_rating().toLowerCase().contains(charString)) {
+                        if (places.getTheatre_name().toLowerCase().contains(charString) || places.getTheatre_Address().toLowerCase().contains(charString)) {
 
                             filteredList.add(places);
                         }
