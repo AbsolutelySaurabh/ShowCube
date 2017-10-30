@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="170dp"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginBottom="10dp"
     android:foreground="?attr/selectableItemBackground">
@@ -17,15 +17,15 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="150dp"
         android:layout_weight="0.8"
-        android:padding="3dp"
+        android:padding="5dp"
         >
 
         <ImageView
             android:id="@+id/theatre_image"
             android:layout_width="137dp"
-            android:layout_height="match_parent"
+            android:layout_height="150dp"
             android:scaleType="centerCrop"
             android:src="@drawable/dummy_theatre" />
 
@@ -62,68 +62,66 @@
         </RelativeLayout>
     </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/theatre_card_bottom"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hapticFeedbackEnabled="true"
-            >
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/theatre_card_bottom"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:hapticFeedbackEnabled="true"-->
+            <!--&gt;-->
 
-    <ImageButton
-        android:layout_marginLeft="20dp"
-        android:id="@+id/theatre_address_button"
-        android:layout_width="@dimen/cards_button_width"
-        android:layout_height="@dimen/cards_button_height"
-        app:srcCompat="@drawable/ic_location_on_black_24dp"
-        android:layout_centerVertical="true"
-        style="?android:attr/borderlessButtonStyle"
-        android:backgroundTint="@color/grey_200"
-        android:tint="@color/colorBlue"
+            <!--<ImageButton-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:id="@+id/theatre_location"-->
+                <!--android:layout_width="@dimen/cards_button_width"-->
+                <!--android:layout_height="@dimen/cards_button_height"-->
+                <!--app:srcCompat="@drawable/ic_location_on_black_24dp"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--style="?android:attr/borderlessButtonStyle"-->
+                <!--android:tint="@color/green_dark"-->
 
-        />
+                <!--/>-->
 
-            <ImageButton
-                android:layout_marginLeft="20dp"
-                android:id="@+id/theatre_web"
-                android:layout_width="@dimen/cards_button_width"
-                android:layout_height="@dimen/cards_button_height"
-                app:srcCompat="@drawable/ic_website_black_24dp"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/theatre_address_button"
-                style="?android:attr/borderlessButtonStyle"
-                android:backgroundTint="@color/grey_200"
-                android:tint="@color/colorBlue"
+            <!--<ImageButton-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:id="@+id/theatre_web"-->
+                <!--android:layout_width="@dimen/cards_button_width"-->
+                <!--android:layout_height="@dimen/cards_button_height"-->
+                <!--app:srcCompat="@drawable/ic_website_black_24dp"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_toRightOf="@id/theatre_location"-->
+                <!--style="?android:attr/borderlessButtonStyle"-->
+                <!--android:tint="@color/green_dark"-->
 
-                />
+                <!--/>-->
 
-            <ImageButton
-                android:layout_marginRight="20dp"
-                android:id="@+id/theatre_rating"
-                android:layout_width="@dimen/cards_button_width"
-                android:layout_height="@dimen/cards_button_height"
-                app:srcCompat="@drawable/ic_top_rated"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                style="?android:attr/borderlessButtonStyle"
-                android:backgroundTint="@color/grey_200"
-                android:tint="@color/colorBlue"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/theatre_rating"-->
+                <!--android:layout_width="32dp"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:text="4.4"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:textSize="14sp"-->
+                <!--android:textColor="@color/white"-->
+                <!--style="?android:attr/borderlessButtonStyle"-->
+                <!--android:background="@mipmap/ic_rating_back_green"-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--/>-->
 
-            <ImageButton
-                android:layout_marginRight="20dp"
-                android:id="@+id/theatre_call"
-                android:layout_width="@dimen/cards_button_width"
-                android:layout_height="@dimen/cards_button_height"
-                app:srcCompat="@drawable/ic_call_black_24dp"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@id/theatre_rating"
-                style="?android:attr/borderlessButtonStyle"
-                android:backgroundTint="@color/grey_200"
-                android:tint="@color/colorBlue"
+            <!--<ImageButton-->
+                <!--android:layout_marginRight="20dp"-->
+                <!--android:id="@+id/theatre_call"-->
+                <!--android:layout_width="@dimen/cards_button_width"-->
+                <!--android:layout_height="@dimen/cards_button_height"-->
+                <!--app:srcCompat="@drawable/ic_call_black_24dp"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_toLeftOf="@id/theatre_rating"-->
+                <!--style="?android:attr/borderlessButtonStyle"-->
+                <!--android:tint="@color/green_dark"-->
 
-                />
+                <!--/>-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
     </LinearLayout>
 

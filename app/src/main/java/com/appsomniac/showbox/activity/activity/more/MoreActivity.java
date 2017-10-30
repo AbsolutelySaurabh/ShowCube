@@ -1,4 +1,4 @@
-package com.appsomniac.showbox.activity.more.more;
+package com.appsomniac.showbox.activity.activity.more;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;

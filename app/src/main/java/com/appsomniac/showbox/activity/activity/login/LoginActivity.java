@@ -1,4 +1,4 @@
-package com.appsomniac.showbox.activity.more;
+package com.appsomniac.showbox.activity.activity.login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;

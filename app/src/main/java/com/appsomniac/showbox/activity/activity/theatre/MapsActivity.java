@@ -1,4 +1,4 @@
-package com.appsomniac.showbox.activity.more;
+package com.appsomniac.showbox.activity.activity.theatre;
 
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;

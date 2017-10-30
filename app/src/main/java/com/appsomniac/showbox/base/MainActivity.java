@@ -1,16 +1,9 @@
 package com.appsomniac.showbox.base;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
@@ -20,7 +13,6 @@ import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -29,7 +21,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,7 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.appsomniac.showbox.R;
-import com.appsomniac.showbox.activity.more.LoginActivity;
+import com.appsomniac.showbox.activity.activity.login.LoginActivity;
 import com.appsomniac.showbox.fragments.MovieFragment;
 import com.appsomniac.showbox.fragments.NearbyFragment;
 import com.appsomniac.showbox.fragments.PersonalFragment;
@@ -48,16 +39,10 @@ import com.appsomniac.showbox.fragments.TvFragment;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         MovieFragment.OnFragmentInteractionListener,
@@ -226,10 +211,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         setFragmentTv();
 
                         break;
-                    case R.id.personal:
-                        actionBar.setTitle(R.string.personal);
-                        setPersonalFragment();
-                        break;
+//                    case R.id.personal:
+//                        actionBar.setTitle(R.string.personal);
+//                        setPersonalFragment();
+//                        break;
 
                     case R.id.tab_nearby:
                         actionBar.setTitle(R.string.nearby);

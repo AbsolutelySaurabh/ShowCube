@@ -8,21 +8,20 @@
     <tab
         id="@+id/tv_shows"
         icon="@drawable/ic_tv_shows"
-        barColorWhenSelected="#4db6f1"
+        barColorWhenSelected="#ff6f00"
         badgeHidesWhenActive="true"
         title="TV" />
-
 
     <tab
         id="@+id/tab_nearby"
         icon="@drawable/ic_location_on_black_24dp"
         title="Nearby"
-        barColorWhenSelected="#DD2C00"
+        barColorWhenSelected="#4db6f1"
         />
-    <tab
-        id="@+id/personal"
-        icon="@drawable/ic_time"
-        barColorWhenSelected="#ff6f00"
-        badgeHidesWhenActive="true"
-        title="Personal" />
+    <!--<tab-->
+        <!--id="@+id/personal"-->
+        <!--icon="@drawable/ic_time"-->
+        <!--barColorWhenSelected="#ff6f00"-->
+        <!--badgeHidesWhenActive="true"-->
+        <!--title="Personal" />-->
 </tabs>

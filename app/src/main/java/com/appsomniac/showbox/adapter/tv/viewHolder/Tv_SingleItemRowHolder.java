@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appsomniac.showbox.R;
-import com.appsomniac.showbox.activity.more.singleMovie.SingleMovieActivity;
+import com.appsomniac.showbox.activity.activity.singleMovie.SingleMovieActivity;
 import com.appsomniac.showbox.model.Tv;
 
 import java.util.ArrayList;

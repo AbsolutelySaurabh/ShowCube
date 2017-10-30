@@ -1,10 +1,8 @@
 package com.appsomniac.showbox.adapter.recommended.viewHolder;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.appsomniac.showbox.R;
-import com.appsomniac.showbox.activity.more.singleMovie.SingleMovieActivity;
+import com.appsomniac.showbox.activity.activity.singleMovie.SingleMovieActivity;
 import com.appsomniac.showbox.model.Movie;
 import com.appsomniac.showbox.model.Tv;
 

@@ -12,8 +12,8 @@ import java.util.ArrayList;
 
 public class TheatreApiResponse {
 
-    @SerializedName("results")
-    private ArrayList<Theatre> results;
+    @SerializedName("result")
+    private Theatre result;
 
     @SerializedName("status")
     private String status;
@@ -23,7 +23,6 @@ public class TheatreApiResponse {
     }
 
     public Theatre getResults() {
-        return results.get(0);
+        return result;
     }
-
 }

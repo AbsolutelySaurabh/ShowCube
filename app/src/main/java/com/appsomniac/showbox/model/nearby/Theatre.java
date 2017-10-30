@@ -27,8 +27,8 @@ public class Theatre {
     private String theatre_address;
     @SerializedName("website")
     private String theatre_website;
-    @SerializedName("reviews")
-    private ArrayList<ArrayList<String>> theatre_reviews;
+    //@SerializedName("reviews")
+   // private ArrayList<ArrayList<String>> theatre_reviews;
 
     public Theatre(String posterPath, boolean adult, String overview, String releaseDate, List<Integer> genreIds, Integer id,
                  String originalTitle, String originalLanguage, String title, String backdropPath, Double popularity,
@@ -40,6 +40,10 @@ public class Theatre {
 //        this.genreIds = genreIds;
 //        this.id = id;
 //        this.originalTitle = originalTitle;
+
+    }
+
+    public Theatre(){
 
     }
 

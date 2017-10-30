@@ -14,7 +14,8 @@
         android:layout_height="250dp"
         android:scaleX="1.2"
         android:padding="2dp"
-        android:scaleY="1.2"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
         android:src="@drawable/superman"
         android:id="@+id/itemImage"/>
 

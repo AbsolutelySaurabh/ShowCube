@@ -1,7 +1,6 @@
 package com.appsomniac.showbox.adapter.movie.adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.appsomniac.showbox.R;
-import com.appsomniac.showbox.activity.more.more.MoreActivity;
 import com.appsomniac.showbox.adapter.movie.viewHolder.ItemRowHolder;
 import com.appsomniac.showbox.model.section.Movie_SectionDataModel;
 

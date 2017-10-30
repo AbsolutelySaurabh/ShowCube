@@ -25,12 +25,14 @@ public class Config {
 
     public static String Places_base_url = "https://maps.googleapis.com/maps/api/place/nearbysearch/";
     public static String Places_url_comma = ",";
-    public static  String PLaces_base_url_part_2 = "&radius=10000&type=movie_theater&key=";
+    public static  String PLaces_base_url_part_2 = "&radius=5000&type=movie_theater&key=";
     public static String Places_api_key = "AIzaSyBCymXPNhR102bdpC0RJSkuScjDGhYtybE";
 
 
 //    https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJw4XfmsYDDTkR42Qz3AMDbB4&key=AIzaSyBCymXPNhR102bdpC0RJSkuScjDGhYtybE
-    public static String theatre_base_url = "https://maps.googleapis.com/maps/api/place/details/";
+    public static String theatre_details_base_url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=";
+    public static String theatre_details_base_url_2 = "&key=";
+
 
 //    https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=
 // CnRtAAAATLZNl354RwP_9UKbQ_5Psy40texXePv4oAlgP4qNEkdIrkyse7rPXYGd9D_Uj1rVsQdWT4oRz4QrYAJNpFX7rzqqMlZw2h2E2y5IKMUZ7ouD_

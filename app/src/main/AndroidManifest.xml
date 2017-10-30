@@ -11,11 +11,13 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="com.google.android.providers.gsf.permisson.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/icon"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/PopMovies">
         <meta-data
@@ -25,7 +27,7 @@
         <activity
             android:name=".base.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/PopMovies">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,13 +39,13 @@
             android:label="@string/app_name"
             android:theme="@style/PopMovies" />
         <activity
-            android:name=".activity.more.more.MoreActivity"
+            android:name=".activity.activity.more.MoreActivity"
             android:label="@string/title_activity_more"
             android:theme="@style/PopMovies" />
-        <activity android:name=".activity.more.singleMovie.SingleMovieActivity" />
-        <activity android:name=".activity.more.LoginActivity" />
-        <activity android:name=".activity.more.SignUpActivity" />
-        <activity android:name=".activity.more.ResetPasswordActivity" />
+        <activity android:name=".activity.activity.singleMovie.SingleMovieActivity" />
+        <activity android:name=".activity.activity.login.LoginActivity" />
+        <activity android:name=".activity.activity.login.SignUpActivity" />
+        <activity android:name=".activity.activity.login.ResetPasswordActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -57,12 +59,14 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activity.more.MapsActivity"
+            android:name=".activity.activity.theatre.MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
-            android:name=".activity.more.TheatreActivity"
+            android:name=".activity.activity.theatre.TheatreActivity"
             android:label="Nearby Theatres"
+            android:screenOrientation="portrait"
             />
+        <activity android:name=".activity.activity.theatre.TheatreWebViewActivity"></activity>
     </application>
 
 </manifest>

@@ -1,11 +1,13 @@
-package com.appsomniac.showbox.activity.more.singleMovie;
+package com.appsomniac.showbox.activity.activity.singleMovie;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,11 +32,18 @@ import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerFragment;
 import com.google.android.youtube.player.YouTubePlayerView;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import cz.msebera.android.httpclient.Header;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,7 +55,7 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
     public static ArrayList<String> al_video_urls;
 
     public static final String API_KEY = Config.DEVELOPER_KEY;
-    public static  String VIDEO_ID;
+    public static  String VIDEO_ID = "c25GKl5VNeY";
     private static final int RECOVERY_DIALOG_REQUEST = 1;
 
     private YouTubePlayer youTubePlayer;
@@ -71,6 +80,7 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
 
             VIDEO_URL = Config.Youtube_movie_get_video_url_part_1 + movieId + Config.Youtube_get_video_url_part_2;
             getVideoMovie(movieId);
+            getMediaDetails(movieId, "movie");
 
             String title  = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getTitle();
             String overview = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getOverview();
@@ -78,13 +88,15 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
             String release_date = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getReleaseDate();
             String imageUrl = SplashActivity.allMovieSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getPosterPath();
 
-            //TextView titleView = (TextView) this.findViewById(R.id.media_title);
             TextView overviewView = (TextView) this.findViewById(R.id.media_overview);
-            TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
             TextView ratingView = (TextView) this.findViewById(R.id.media_rating);
             ImageView media_poster = (ImageView) this.findViewById(R.id.media_poster);
 
-            //titleView.setText(title);
+            RelativeLayout date_placeholder = (RelativeLayout) this.findViewById(R.id.date_placeholder);
+            TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
+            dateView.setVisibility(View.VISIBLE);
+            date_placeholder.setVisibility(View.VISIBLE);
+
             overviewView.setText(overview);
             dateView.setText(release_date);
             ratingView.setText(rating);
@@ -108,19 +120,23 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
 
                 VIDEO_URL = Config.Youtube_tv_get_video_url_part_1 + tvId + Config.Youtube_get_video_url_part_2;
                 getVideoTv(tvId);
+                getMediaDetails(tvId, "tv");
 
                 String title  = SplashActivity.allTvSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getTitle();
                 String overview = SplashActivity.allTvSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getOverview();
                 String vote_average = String.valueOf(SplashActivity.allTvSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getVoteAverage());
                 String imageUrl = SplashActivity.allTvSampleData.get(sectionPosition).getAllItemsInSection().get(itemPosition).getPosterPath();
 
-//TextView titleView = (TextView) this.findViewById(R.id.media_title);
                 TextView overviewView = (TextView) this.findViewById(R.id.media_overview);
-                //TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
                 TextView ratingView = (TextView) this.findViewById(R.id.media_rating);
                 ImageView media_poster = (ImageView) this.findViewById(R.id.media_poster);
 
-                //titleView.setText(title);
+
+                RelativeLayout date_placeholder = (RelativeLayout) this.findViewById(R.id.date_placeholder);
+                TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
+                dateView.setVisibility(View.GONE);
+                date_placeholder.setVisibility(View.GONE);
+
                 overviewView.setText(overview);
                 ratingView.setText(vote_average);
 
@@ -133,11 +149,9 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
                         .apply(requestOptions).thumbnail(0.5f).into(media_poster);
 
                 getRecommeddedTvs(tvId);
+                
             }else
                 if(movieORtvORrecommended.equals("recommended_movie")){
-
-                    //ArrayList<Movie> al_movies = (ArrayList<Movie>)getIntent().getSerializableExtra("al_movies_recommended");
-                    //int position = getIntent().getIntExtra("itemPosition", 0);
 
                     String overView = getIntent().getStringExtra("movieOverView");
                     String rating = getIntent().getStringExtra("movieRating");
@@ -147,19 +161,17 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
 
                     VIDEO_URL = Config.Youtube_tv_get_video_url_part_1 + movieId + Config.Youtube_get_video_url_part_2;
                     getVideoMovie((movieId));
-
-//                    String overView = al_movies.get(position).getOverview();
-//                    String title = al_movies.get(position).getTitle();
-//                    String rating = String.valueOf(al_movies.get(position).getVoteAverage());
-//                    String release_date = al_movies.get(position).getReleaseDate();
-//                    String posterUrl = al_movies.get(position).getPosterPath();
-
+                    getMediaDetails(movieId, "movie");
 
                     TextView overviewView = (TextView) this.findViewById(R.id.media_overview);
-                    TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
                     TextView ratingView = (TextView) this.findViewById(R.id.media_rating);
                     ImageView media_poster = (ImageView) this.findViewById(R.id.media_poster);
 
+
+                    RelativeLayout date_placeholder = (RelativeLayout) this.findViewById(R.id.date_placeholder);
+                    TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
+                    dateView.setVisibility(View.VISIBLE);
+                    date_placeholder.setVisibility(View.VISIBLE);
 
                     //titleView.setText(title);
                     overviewView.setText(overView);
@@ -179,12 +191,7 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
                 }else
                     if(movieORtvORrecommended.equals("recommended_tv")) {
 
-
                         {
-
-                            //ArrayList<Tv> al_tv = (ArrayList<Tv>) getIntent().getSerializableExtra("al_tv_recommended");
-                           // int position = getIntent().getIntExtra("itemPosition", 0);
-
                             String overView = getIntent().getStringExtra("tvOverview");
                             String rating = getIntent().getStringExtra("tvRating");
                             String posterUrl = getIntent().getStringExtra("tvPosterUrl");
@@ -192,22 +199,19 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
 
                             VIDEO_URL = Config.Youtube_tv_get_video_url_part_1 + tvId + Config.Youtube_get_video_url_part_2;
                             getVideoTv(tvId);
-
-//                            String overView = al_tv.get(position).getOverview();
-//                            String title = al_tv.get(position).getTitle();
-//                            String rating = String.valueOf(al_tv.get(position).getVoteAverage());
-//                            String posterUrl = al_tv.get(position).getPosterPath();
-
+                            getMediaDetails(tvId, "tv");
 
                             TextView overviewView = (TextView) this.findViewById(R.id.media_overview);
-//                            TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
                             TextView ratingView = (TextView) this.findViewById(R.id.media_rating);
                             ImageView media_poster = (ImageView) this.findViewById(R.id.media_poster);
 
+                            RelativeLayout date_placeholder = (RelativeLayout) this.findViewById(R.id.date_placeholder);
+                            TextView dateView = (TextView) this.findViewById(R.id.media_release_date);
+                            dateView.setVisibility(View.GONE);
+                            date_placeholder.setVisibility(View.GONE);
 
                             //titleView.setText(title);
                             overviewView.setText(overView);
-//                            dateView.setText(release_date);
                             ratingView.setText(rating);
 
                             String posterBaseUrl = "http://image.tmdb.org/t/p/w185/" + posterUrl;
@@ -219,10 +223,105 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
                                     .apply(requestOptions).thumbnail(0.5f).into(media_poster);
 
                             getRecommeddedMovies(tvId);
-
-
+                            
                         }
                     }
+    }
+
+
+    public void getMediaDetails(String media_id, String movieORtv){
+
+        String MEDIA_REQUEST_URL = null;
+        if(movieORtv.equals("movie")){
+
+            MEDIA_REQUEST_URL = "https://api.themoviedb.org/3/movie/" + media_id + "?api_key=" + Config.API_KEY + "&language=en-US\n";
+
+        }else
+            if(movieORtv.equals("tv")){
+
+                MEDIA_REQUEST_URL = "https://api.themoviedb.org/3/tv/" + media_id + "?api_key=" + Config.API_KEY + "&language=en-US\n";
+            }
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(this, MEDIA_REQUEST_URL , new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject responseObject) {
+                try {
+
+                    TextView genre_1 = findViewById(R.id.genre_1);
+//                    TextView genre_2 = findViewById(R.id.genre_2);
+                    TextView genre_3 = findViewById(R.id.genre_3);
+
+                    JSONArray al_genres = responseObject.getJSONArray("genres");
+                    ArrayList<String> al_genres_name = new ArrayList<String>();
+
+                    for(int i=0;i<al_genres.length();i++){
+
+                        JSONObject obj = al_genres.getJSONObject(i);
+
+                        al_genres_name.add(obj.getString("name"));
+                    }
+
+                    try {
+                        genre_1.setText(al_genres_name.get(0));
+                    }catch(NullPointerException e){
+                        e.printStackTrace();
+                    }catch(IndexOutOfBoundsException e){
+                        e.printStackTrace();
+                    }
+
+                    if(al_genres_name.size() == 2){
+
+                        try {
+                            genre_3.setText(al_genres_name.get(1));
+                            genre_3.setVisibility(View.VISIBLE);
+
+                        }catch(NullPointerException e){
+                            genre_3.setVisibility(View.GONE);
+                            e.printStackTrace();
+                        }catch(IndexOutOfBoundsException e){
+                            genre_3.setVisibility(View.GONE);
+                            e.printStackTrace();
+                        }
+
+                    }
+
+//                    try {
+//                        genre_2.setText(al_genres_name.get(1));
+//                        genre_2.setVisibility(View.VISIBLE);
+//                    }catch(NullPointerException e){
+//                        genre_2.setVisibility(View.GONE);
+//                        e.printStackTrace();
+//                    }catch(IndexOutOfBoundsException e){
+//                        genre_2.setVisibility(View.GONE);
+//                        e.printStackTrace();
+//                    }
+
+                    try {
+                        genre_3.setText(al_genres_name.get(2));
+                        genre_3.setVisibility(View.VISIBLE);
+
+                    }catch(NullPointerException e){
+                        genre_3.setVisibility(View.GONE);
+                        e.printStackTrace();
+                    }catch(IndexOutOfBoundsException e){
+                        genre_3.setVisibility(View.GONE);
+                        e.printStackTrace();
+                    }
+
+
+                } catch (JSONException e){
+                    Log.e("QueryUtils", "Problem parsing the News JSON results", e);
+                }
+
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+        });
+
+
     }
 
     @Override
@@ -332,6 +431,11 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
                     }else{
 
                         VIDEO_ID = videos.get(1).getKey();
+
+                        if(VIDEO_ID.equals("null")){
+
+                            VIDEO_ID = videos.get(2).getKey();
+                        }
                     }
                 }catch(IndexOutOfBoundsException e){
                     e.printStackTrace();

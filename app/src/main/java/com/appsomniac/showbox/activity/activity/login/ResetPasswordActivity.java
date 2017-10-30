@@ -1,4 +1,4 @@
-package com.appsomniac.showbox.activity.more;
+package com.appsomniac.showbox.activity.activity.login;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;

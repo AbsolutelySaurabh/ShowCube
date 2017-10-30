@@ -17,7 +17,7 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionItemRowH
 
     private ArrayList<Movie> itemsList;
     private Context mContext;
-    public int sectionPosition;
+    private int sectionPosition;
 
     public SectionListDataAdapter(Context context, ArrayList<Movie> itemsList, int sectionPosition) {
         this.itemsList = itemsList;
@@ -42,12 +42,15 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionItemRowH
 
         String posterBaseUrl = "http://image.tmdb.org/t/p/w185/"+singleItem.getPosterPath();
 
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.drawable.fightclub);
-        requestOptions.error(R.drawable.spectre);
+        if(!posterBaseUrl.equals("null")) {
 
-        Glide.with(mContext).load(posterBaseUrl)
-                .apply(requestOptions).thumbnail(0.5f).into(holder.itemImage);
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions.placeholder(R.drawable.fightclub);
+            requestOptions.error(R.drawable.spectre);
+
+            Glide.with(mContext).load(posterBaseUrl)
+                    .apply(requestOptions).thumbnail(0.5f).into(holder.itemImage);
+        }
 
     }
 
