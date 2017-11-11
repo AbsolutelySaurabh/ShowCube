@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/splash_background"
     android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="@color/colorPrimary"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="16dp">
-
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="30dp"
-            android:src="@mipmap/ic_play_circle" />
+            android:src="@drawable/icon_3" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -61,11 +58,11 @@
             android:id="@+id/sign_up_button"
             style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="16dp"
-            android:background="@color/colorAccent"
+            android:background="@drawable/splash_background"
             android:text="@string/action_sign_in_short"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textStyle="bold" />
 
         <!--<Button-->
@@ -95,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@null"
+            android:textColor="@color/white"
             android:text="@string/btn_link_to_login"
             android:textAllCaps="false"
             android:textSize="15dp" />

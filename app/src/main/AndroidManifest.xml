@@ -11,11 +11,12 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="com.google.android.providers.gsf.permisson.READ_GSERVICES" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!--<uses-permission android:name="android.permission.CALL_PHONE" />-->
+
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/icon"
+        android:icon="@drawable/icon_3"
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
@@ -43,9 +44,18 @@
             android:label="@string/title_activity_more"
             android:theme="@style/PopMovies" />
         <activity android:name=".activity.activity.singleMovie.SingleMovieActivity" />
-        <activity android:name=".activity.activity.login.LoginActivity" />
-        <activity android:name=".activity.activity.login.SignUpActivity" />
-        <activity android:name=".activity.activity.login.ResetPasswordActivity" />
+        <activity
+            android:name=".activity.activity.login.LoginActivity"
+            android:theme="@style/SignInScreen"
+            />
+        <activity
+            android:name=".activity.activity.login.SignUpActivity"
+            android:theme="@style/SignInScreen"
+            />
+        <activity
+            android:name=".activity.activity.login.ResetPasswordActivity"
+            android:theme="@style/SignInScreen"
+            />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

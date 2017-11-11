@@ -1,6 +1,6 @@
 <resources>
     <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">@color/mid_grey</color>
+    <color name="colorPrimaryDark">#00695c</color>
     <color name="colorAccent">#00B0FF</color>
     <color name="colorWhite">#ffffff</color>
     <color name="colorFavorite">#ffeb3b</color>
@@ -9,7 +9,8 @@
     <color name="colorBlue">#2D9CDB</color>
     <color name="colorBlueDark">#2992CD</color>
     <color name="colorBlueDarkest">#212121</color>
-
+    <color name="lightorange">#fdf2df</color>
+    <color name="lightorangedark">#ebd6ab</color>
     <color name="primary_text">#212121</color>
     <color name="secondary_text">#727272</color>
 

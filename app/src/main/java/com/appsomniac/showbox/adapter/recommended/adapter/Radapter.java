@@ -51,8 +51,8 @@ public class Radapter extends RecyclerView.Adapter<RviewHolder> {
     public void onBindViewHolder(RviewHolder holder, int position) {
 
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.mipmap.ic_launcher_round);
-        requestOptions.error(R.mipmap.ic_launcher_round);
+        requestOptions.error(R.color.background_lightish);
+        requestOptions.error(R.color.background_lightish);
 
         if(movieORtv.equals("movie")) {
 

@@ -45,8 +45,8 @@ public class SectionListDataAdapter extends RecyclerView.Adapter<SectionItemRowH
         if(!posterBaseUrl.equals("null")) {
 
             RequestOptions requestOptions = new RequestOptions();
-            requestOptions.placeholder(R.drawable.fightclub);
-            requestOptions.error(R.drawable.spectre);
+            requestOptions.placeholder(R.drawable.wonderwoman);
+            requestOptions.error(R.color.background_lightish);
 
             Glide.with(mContext).load(posterBaseUrl)
                     .apply(requestOptions).thumbnail(0.5f).into(holder.itemImage);

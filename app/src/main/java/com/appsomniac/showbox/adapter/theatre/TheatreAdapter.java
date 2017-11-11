@@ -55,7 +55,7 @@ public class TheatreAdapter extends RecyclerView.Adapter<TheatreViewHolder> impl
         try{
             RequestOptions requestOptions = new RequestOptions();
             requestOptions.placeholder(R.drawable.theatre_placeholder);
-            requestOptions.error(R.drawable.theatre_placeholder);
+            requestOptions.error(R.color.background_lightish);
             String theatre_pic_url="";
             Log.e("al_theatre adapter: ", String.valueOf(filtered_al_theatre.get(position)));
 

@@ -40,8 +40,8 @@ public class Tv_SectionListDataAdapter extends RecyclerView.Adapter<Tv_SingleIte
 
         String posterBaseUrl = "http://image.tmdb.org/t/p/w185/"+singleItem.getPosterPath();
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions.placeholder(R.drawable.superman);
-        requestOptions.error(R.drawable.superman);
+        requestOptions.placeholder(R.drawable.wonderwoman);
+        requestOptions.error(R.color.background_lightish);
 
         Glide.with(mContext).load(posterBaseUrl)
                 .apply(requestOptions).thumbnail(0.5f).into(holder.itemImage);

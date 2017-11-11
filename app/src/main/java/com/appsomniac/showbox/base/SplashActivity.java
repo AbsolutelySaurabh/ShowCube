@@ -21,6 +21,11 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.appsomniac.showbox.R;
@@ -47,6 +52,7 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStates;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,6 +73,10 @@ public class SplashActivity extends Activity{
     public static String currentLocation;
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 2000;
+
+    RelativeLayout l1,l2;
+    Button btnsub;
+    Animation uptodown,downtoup;
 
     private TextView mTextMessage;
     public static ArrayList<Movie_SectionDataModel> allMovieSampleData;
@@ -96,8 +106,6 @@ public class SplashActivity extends Activity{
     double latitude;
     double longitude;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,6 +119,13 @@ public class SplashActivity extends Activity{
 
         al_movie = new ArrayList<>();
         al_tv = new ArrayList<>();
+
+//        l1 = (RelativeLayout) findViewById(R.id.l1);
+//        l2 = (RelativeLayout) findViewById(R.id.l2);
+//        uptodown = AnimationUtils.loadAnimation(this,R.anim.fade_in);
+//        downtoup = AnimationUtils.loadAnimation(this,R.anim.fade_in);
+//        l1.setAnimation(uptodown);
+        //l2.setAnimation(downtoup);
 
         //locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
        // getLocation();
