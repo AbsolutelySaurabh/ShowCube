@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
-        <!--<shape>-->
-            <!--<gradient-->
-                <!--android:startColor="#ff2d9a59"-->
-                <!--android:centerColor="#ff42959a"-->
-                <!--android:endColor="#ff23729a"-->
-                <!--android:angle="135"/>-->
-        <!--</shape>-->
-        <bitmap
-            android:src="@drawable/back_7"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+        <shape>
+            <gradient
+                android:startColor="#ff2d9a59"
+                android:centerColor="#ff42959a"
+                android:endColor="#ff23729a"
+                android:angle="135"/>
+        </shape>
+        <!--<bitmap-->
+            <!--android:src="@drawable/back_7"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent" />-->
 
     </item>
 </selector>

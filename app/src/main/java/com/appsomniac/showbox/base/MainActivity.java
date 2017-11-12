@@ -1,5 +1,6 @@
 package com.appsomniac.showbox.base;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -26,6 +28,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -75,9 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-
         nav = (NavigationView) findViewById(R.id.navigation);
-
         if (nav != null) {
             LinearLayout mParent = (LinearLayout) nav.getHeaderView(0);
 
@@ -87,12 +89,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 SharedPreferences prefs = getSharedPreferences("user_data", MODE_PRIVATE);
                 String photoUrl = prefs.getString("photo_url", null);
                 String user_name = prefs.getString("name", "User");
+                String user_email = prefs.getString("email", "showbox03@gmail.com");
 
                 if (photoUrl != null) {
                     Log.e("Photo Url: ", photoUrl);
 
                     TextView userName = mParent.findViewById(R.id.user_name);
                     userName.setText(user_name);
+
+                    TextView text_view_user_email = mParent.findViewById(R.id.header_user_email);
+                    text_view_user_email.setText(user_email);
 
                     ImageView user_imageView = mParent.findViewById(R.id.avatar);
 
@@ -104,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             .apply(requestOptions).thumbnail(0.5f).into(user_imageView);
 
                 }
-
             }
         }
 
@@ -123,24 +128,53 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
 
-        getWindow().getDecorView().setSystemUiVisibility(
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-
-//        if (!checkLocation()) {
-//
-//            //tvEmpty.setVisibility(View.VISIBLE);
-//            return;
-//        } else {
-//            locationManager.requestLocationUpdates(
-//                    LocationManager.GPS_PROVIDER, 2 * 60 * 1000, 10, locationListenerGPS);
-//
-//        }
-
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 
         bottomBar = (BottomBar) findViewById(R.id.bottom_navigation);
         setUi();
 
+    }
+
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if(id == R.id.nav_drawer_info){
+
+            final Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.legal_info_dialog);
+            dialog.show();
+            Button close_button = (Button) dialog.findViewById(R.id.info_close);
+            close_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.cancel();
+                }
+            });
+        }else
+            if(id == R.id.nav_drawer_share){
+
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, "Hey,\n Look at the ShowBox app on google playstore.");
+                startActivity(Intent.createChooser(intent, "Share with"));
+
+            }else
+                if(id==R.id.nav_drawer_logout){
+
+                    mFirebaseAuth.signOut();
+                    //Auth.GoogleSignInApi.signOut(mGoogleApiClient);
+                    mUsername = ANONYMOUS;
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    finish();
+                }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 
 
@@ -308,11 +342,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setDrawer();
         setBottomNavigation();
 
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        return false;
     }
 
     @Override

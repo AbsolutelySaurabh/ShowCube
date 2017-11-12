@@ -1,5 +1,7 @@
 package com.appsomniac.showbox.activity.activity.login;
 
+
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.widget.Toast;
 
 import com.appsomniac.showbox.R;
 import com.appsomniac.showbox.base.MainActivity;
+import com.appsomniac.showbox.model.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -29,19 +32,33 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener {
 
-    private static final String TAG = "SignInActivity";
+    private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 9001;
     private SignInButton mSignInButton;
     private GoogleApiClient mGoogleApiClient;
+
+    public static int firstLogin = 0;
+
+    //add Firebase Database stuff
+    private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mFirebaseAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference myRef;
+    private String userID;
 
     private EditText inputEmail, inputPassword;
     private ProgressBar progressBar;
     private Button btnSignup, btnLogin, btnReset;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,9 +163,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             editor.putString("photo_url", String.valueOf(user.getPhotoUrl()));
             editor.apply();
 
-            // Go back to the main activity
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
         }
     }
 
@@ -170,6 +184,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (mGoogleApiClient != null && mGoogleApiClient.isConnected()) {
             mGoogleApiClient.clearDefaultAccountAndReconnect();
         }
+
+        progressBar.setVisibility(View.VISIBLE);
+
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
@@ -210,9 +227,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                     Toast.LENGTH_SHORT).show();
                         } else {
 
-                            handleFirebaseAuthResult(task.getResult());
-                            //startActivity(new Intent(LoginActivity.this, MainActivity.class));
-//                            finish();
+                            progressBar.setVisibility(View.GONE);
+                            checkUniqueUser(task.getResult());
+
                         }
                     }
                 });
@@ -225,4 +242,56 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }
+
+    public void checkUniqueUser(final AuthResult authResult){
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        myRef = mFirebaseDatabase.getReference("users");
+
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        userID = user.getUid();
+
+        myRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(!dataSnapshot.exists()){
+
+                    addUserToDatabase();
+                    handleFirebaseAuthResult(authResult);
+                    firstLogin = 1;
+                    Log.e("Unique USER:. ", String.valueOf(firstLogin));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+
+                }else{
+                    Log.e("Unique USER:. ", String.valueOf(firstLogin));
+                    handleFirebaseAuthResult(authResult);
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void addUserToDatabase(){
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        userID = user.getUid();
+        userID = user.getUid();
+
+        User userInformation = new User(user.getDisplayName(), user.getEmail(), user.getPhoneNumber(), user.getPhotoUrl().toString());
+        myRef.child("users").child(userID).setValue(userInformation);
+
+        }
 }

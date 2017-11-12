@@ -277,10 +277,10 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
                             genre_3.setVisibility(View.VISIBLE);
 
                         }catch(NullPointerException e){
-                            genre_3.setVisibility(View.GONE);
+                            genre_3.setVisibility(View.VISIBLE);
                             e.printStackTrace();
                         }catch(IndexOutOfBoundsException e){
-                            genre_3.setVisibility(View.GONE);
+                            genre_3.setVisibility(View.VISIBLE);
                             e.printStackTrace();
                         }
 
@@ -302,10 +302,10 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
                         genre_3.setVisibility(View.VISIBLE);
 
                     }catch(NullPointerException e){
-                        genre_3.setVisibility(View.GONE);
+                        genre_3.setVisibility(View.VISIBLE);
                         e.printStackTrace();
                     }catch(IndexOutOfBoundsException e){
-                        genre_3.setVisibility(View.GONE);
+                        genre_3.setVisibility(View.VISIBLE);
                         e.printStackTrace();
                     }
 
@@ -427,20 +427,34 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
                 try {
                     if(!videos.get(0).equals("null")){
 
-                        VIDEO_ID = videos.get(0).getKey();
+                        try {
+                            VIDEO_ID = videos.get(0).getKey();
+                        }catch(NullPointerException e){
+                            e.printStackTrace();
+                        }
                     }else{
 
-                        VIDEO_ID = videos.get(1).getKey();
-
-                        if(VIDEO_ID.equals("null")){
-
-                            VIDEO_ID = videos.get(2).getKey();
+                        try {
+                            VIDEO_ID = videos.get(1).getKey();
+                        }catch(NullPointerException e){
+                            e.printStackTrace();
                         }
-                    }
-                }catch(IndexOutOfBoundsException e){
+
+                            if(VIDEO_ID.equals("null")){
+
+                                try {
+                                    VIDEO_ID = videos.get(2).getKey();
+                                }catch(NullPointerException e){
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }catch(IndexOutOfBoundsException e){
+                        e.printStackTrace();
+                    }catch(NullPointerException e) {
+
                     e.printStackTrace();
                 }
-
 
                 youTubePlayerFragment = (YouTubePlayerFragment) getFragmentManager().findFragmentById(R.id.youtubeplayerfragment);
                 youTubePlayerFragment.initialize(API_KEY, SingleMovieActivity.this);
@@ -477,12 +491,31 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
                 try {
                     if(!videos.get(0).equals("null")){
 
-                        VIDEO_ID = videos.get(0).getKey();
+                        try {
+                            VIDEO_ID = videos.get(0).getKey();
+                        }catch(NullPointerException e){
+                            e.printStackTrace();
+                        }
                     }else{
 
-                        VIDEO_ID = videos.get(1).getKey();
+                        try {
+                            VIDEO_ID = videos.get(1).getKey();
+                        }catch(NullPointerException e){
+                            e.printStackTrace();
+                        }
+
+                        if(VIDEO_ID.equals("null")){
+
+                            try {
+                                VIDEO_ID = videos.get(2).getKey();
+                            }catch(NullPointerException e){
+                                e.printStackTrace();
+                            }
+                        }
                     }
                 }catch(IndexOutOfBoundsException e){
+                    e.printStackTrace();
+                }catch(NullPointerException e){
                     e.printStackTrace();
                 }
 

@@ -10,33 +10,41 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:layout_marginBottom="100dp">
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/header"
         android:orientation="vertical"
         android:background="@color/colorBlue"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="200dp">
 
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/get_location"
-            android:layout_width="70dp"
-            android:layout_height="70dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            >
 
-        <TextView
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
-            android:gravity="center"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/large_text"
-            android:paddingLeft="35dp"
-            android:paddingRight="35dp"
-            android:text="Welcome! Find Cinemas near you."
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/l_image"
+                android:layout_gravity="center"
+                android:src="@drawable/get_location"
+                android:layout_width="70dp"
+                android:layout_centerHorizontal="true"
+                android:layout_height="70dp" />
 
-    </LinearLayout>
+            <TextView
+                android:layout_below="@id/l_image"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/large_text"
+                android:text="Welcome! Find Cinemas near you."
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+    </RelativeLayout>
 
     <android.support.v7.widget.CardView
         card_view:elevation="4dp"

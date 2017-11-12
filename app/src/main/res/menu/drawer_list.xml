@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <group
-        android:id="@+id/second"
         android:checkableBehavior="single">
         <item
-            android:title="@string/settings_item"
-            android:icon="@drawable/settings"
-            android:id="@+id/settings">
+            android:title="Home"
+            android:checked="true"
+            android:icon="@drawable/ic_home_black_dark_24dp"
+            android:id="@+id/nav_drawer_home">
         </item>
 
         <item
-            android:title="@string/help_item"
-            android:icon="@android:drawable/ic_menu_help"
-            android:id="@+id/help"/>
+            android:title="Share App"
+            android:icon="@drawable/ic_share_black_dark_24dp"
+            android:id="@+id/nav_drawer_share"/>
+
+        <item
+            android:title="Legal Info"
+            android:icon="@drawable/ic_info_black_dark_24dp"
+            android:id="@+id/nav_drawer_info"/>
+
+        <item
+            android:title="Sign Out"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:id="@+id/nav_drawer_logout"/>
     </group>
 </menu>

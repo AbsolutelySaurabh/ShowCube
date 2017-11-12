@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/splash_background"
+    android:background="@drawable/splash_back_9"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -14,12 +14,12 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:elevation="5dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/icon_5" />
+            android:src="@drawable/icon_7" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -63,7 +63,7 @@
             android:hapticFeedbackEnabled="true"
             android:text="LOGIN"
             android:shadowColor="@color/blue_grey_900"
-            android:background="@drawable/splash_background"
+            android:background="@drawable/splash_back_9"
             android:textColor="@android:color/white" />
 
         <Button

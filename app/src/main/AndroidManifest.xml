@@ -69,9 +69,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activity.activity.theatre.MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity
             android:name=".activity.activity.theatre.TheatreActivity"
             android:label="Nearby Theatres"
             android:screenOrientation="portrait"

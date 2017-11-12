@@ -1,6 +1,7 @@
 package com.appsomniac.showbox.activity.activity.login;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.appsomniac.showbox.R;
 import com.appsomniac.showbox.base.MainActivity;
+import com.appsomniac.showbox.model.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -30,17 +32,31 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
-public class SignUpActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,
-        View.OnClickListener {
+
+public class SignUpActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     private EditText inputEmail, inputPassword;
     private Button btnSignIn, btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
 
+    public static int firstLogin = 0;
+    public static int email_signUp_flag = 0;
 
-    private static final String TAG = "SignInActivity";
+    //add Firebase Database stuff
+    private FirebaseDatabase mFirebaseDatabase;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private DatabaseReference myRef;
+    private String userID;
+
+
+    private static final String TAG = "SignUpnActivity";
     private static final int RC_SIGN_IN = 9001;
     private SignInButton mSignInButton;
     private GoogleApiClient mGoogleApiClient;
@@ -99,15 +115,18 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
                         .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(SignUpActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, "Registered Successfully:", Toast.LENGTH_SHORT).show();
                                 progressBar.setVisibility(View.GONE);
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(SignUpActivity.this, "Authentication failed." + task.getException(),
+                                    Toast.makeText(SignUpActivity.this, "Authentication Failed!",
                                             Toast.LENGTH_SHORT).show();
                                 } else {
+
+                                    email_signUp_flag=1;
+                                    checkUniqueUser(task.getResult());
                                     startActivity(new Intent(SignUpActivity.this, MainActivity.class));
                                     finish();
                                 }
@@ -116,12 +135,12 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
             }
         });
 
-        /////////////Google Sign-In
+        // Assign fields
         mSignInButton = (SignInButton) findViewById(R.id.google_sign_in_button);
 
         // Set click listeners
         mSignInButton.setOnClickListener(this);
-
+//
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -152,6 +171,7 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
             finish();
         }
     }
+
 
     @Override
     public void onClick(View v) {
@@ -192,6 +212,7 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
         }
     }
 
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
@@ -199,19 +220,19 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
+
+                        Log.e(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
-                            Log.w(TAG, "signInWithCredential", task.getException());
+                            Log.e(TAG, "signInWithCredential", task.getException());
                             Toast.makeText(SignUpActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
-//                            startActivity(new Intent(SignUpActivity.this, MainActivity.class));
-//                            finish();
-                            handleFirebaseAuthResult(task.getResult());
+
+                            checkUniqueUser(task.getResult());
 
                         }
                     }
@@ -233,4 +254,75 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
         progressBar.setVisibility(View.GONE);
     }
 
+    public void checkUniqueUser(final AuthResult authResult){
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        myRef = mFirebaseDatabase.getReference("users");
+
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        userID = user.getUid();
+
+        myRef.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(!dataSnapshot.exists()){
+
+                    if(email_signUp_flag == 1) {
+
+                        addUserToDatabaseViaEmail();
+                    }else {
+
+                        addUserToDatabase();
+                    }
+
+                    handleFirebaseAuthResult(authResult);
+                    firstLogin = 1;
+                    Log.e("Unique USER:. ", String.valueOf(firstLogin));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+
+
+                }else{
+                    Log.e("Unique USER:. ", String.valueOf(firstLogin));
+                    handleFirebaseAuthResult(authResult);
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
+
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    public void addUserToDatabaseViaEmail(){
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        userID = user.getUid();
+
+        User userInformation = new User(user.getDisplayName(),user.getEmail(),user.getPhoneNumber(), "");
+        myRef.child("users").child(userID).setValue(userInformation);
+
+    }
+
+    public void addUserToDatabase(){
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        myRef = mFirebaseDatabase.getReference();
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        userID = user.getUid();
+
+         User userInformation = new User(user.getDisplayName(), user.getEmail(), user.getPhoneNumber(), user.getPhotoUrl().toString());
+        myRef.child("users").child(userID).setValue(userInformation);
+        }
 }
