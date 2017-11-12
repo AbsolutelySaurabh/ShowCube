@@ -51,7 +51,7 @@ public class MoreActivity extends AppCompatActivity {
             collaspingToolBar.setTitle("Top Rated Movies");
             collaspingToolBar.setCollapsedTitleTextColor(getResources().getColor(R.color.blue_grey_900));
             ImageView newsImage = (ImageView) findViewById(R.id.image);
-            Glide.with(this).load(R.drawable.kaabil).thumbnail(0.5f).into(newsImage);
+            Glide.with(this).load(R.drawable.wonderwoman).thumbnail(0.5f).into(newsImage);
 
         }else
 
@@ -59,19 +59,19 @@ public class MoreActivity extends AppCompatActivity {
             collaspingToolBar.setTitle("Upcoming Movies");
             collaspingToolBar.setCollapsedTitleTextColor(getResources().getColor(R.color.blue_grey_900));
             ImageView newsImage = (ImageView) findViewById(R.id.image);
-            Glide.with(this).load(R.drawable.kaabil).thumbnail(0.5f).into(newsImage);
+            Glide.with(this).load(R.drawable.wonderwoman).thumbnail(0.5f).into(newsImage);
         }else
         if(intent_message.equals("Now Playing")){
             collaspingToolBar.setTitle("Now Playing Movies");
             collaspingToolBar.setCollapsedTitleTextColor(getResources().getColor(R.color.blue_grey_900));
             ImageView newsImage = (ImageView) findViewById(R.id.image);
-            Glide.with(this).load(R.drawable.kaabil).thumbnail(0.5f).into(newsImage);
+            Glide.with(this).load(R.drawable.wonderwoman).thumbnail(0.5f).into(newsImage);
         }else
         if(intent_message.equals("Popular")){
             collaspingToolBar.setTitle("Popular Movies");
             collaspingToolBar.setCollapsedTitleTextColor(getResources().getColor(R.color.blue_grey_900));
             ImageView newsImage = (ImageView) findViewById(R.id.image);
-            Glide.with(this).load(R.drawable.kaabil).thumbnail(0.5f).into(newsImage);
+            Glide.with(this).load(R.drawable.wonderwoman).thumbnail(0.5f).into(newsImage);
         }
 
     }

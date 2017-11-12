@@ -298,7 +298,6 @@ public class SignUpActivity extends AppCompatActivity implements GoogleApiClient
 
             }
         });
-
     }
 
     public void addUserToDatabaseViaEmail(){

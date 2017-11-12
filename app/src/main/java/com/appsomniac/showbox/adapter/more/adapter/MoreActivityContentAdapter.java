@@ -47,8 +47,8 @@ public class MoreActivityContentAdapter extends RecyclerView.Adapter<MoreActivit
                     .getAllItemsInSection().get(position).getPosterPath();
 
             RequestOptions requestOptions = new RequestOptions();
-            requestOptions.placeholder(R.drawable.spectre);
-            requestOptions.error(R.drawable.spectre);
+            requestOptions.placeholder(R.drawable.wonderwoman);
+            requestOptions.error(R.drawable.wonderwoman);
 
             Log.e("POSTERURL: ", posterBaseUrl);
 
@@ -58,9 +58,6 @@ public class MoreActivityContentAdapter extends RecyclerView.Adapter<MoreActivit
             }catch(NullPointerException n){
                 n.printStackTrace();
             }
-
-//            holder.title.setText(SplashActivity.allMovieSampleData.get(section_position)
-//                    .getAllItemsInSection().get(position).getTitle());
 
         }catch (IndexOutOfBoundsException e){
             e.printStackTrace();

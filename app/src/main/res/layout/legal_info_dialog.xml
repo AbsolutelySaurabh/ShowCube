@@ -4,17 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="300dp"
     android:layout_height="500dp"
+    android:padding="5dp"
+    android:background="@drawable/back_7"
     android:layout_gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Legal Info:"
-        android:padding="5dp"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        android:layout_marginBottom="25dp"
-        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/back_7"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Legal Info:"
+            android:textAlignment="center"
+            android:padding="5dp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginBottom="25dp"
+            />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -55,14 +66,14 @@
        This product includes software developed by the Appsomniac.
                 Alternately, this acknowledgment may appear in the software itself,
                 if and wherever such third-party acknowledgments normally appear.
-             4. The names NewsHour and Appsomniac must
+             4. The names ShowBox and Appsomniac must
                 not be used to endorse or promote products derived from this
                 software without prior written permission. For written
                 permission, please contact apache@apache.org.
-             5. Products derived from this software may not be called NewsHour,
+             5. Products derived from this software may not be called ShowBox,
                 without prior written
                 permission.
-             6. News Source : http://www.newsapi.org.
+             6. News Source : http://www.themoviedb.com.
 
              THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
              WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
@@ -88,12 +99,13 @@
     <Button
         android:id="@+id/info_close"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:text="Close"
         android:layout_gravity="bottom"
         android:padding="5dp"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
+        android:background="@drawable/back_7"
         />
 
 </android.support.v7.widget.CardView>

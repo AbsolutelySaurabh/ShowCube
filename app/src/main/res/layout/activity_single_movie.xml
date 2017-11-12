@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:fitsSystemWindows="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:fitsSystemWindows="true"
@@ -33,7 +38,7 @@
                 android:layout_height="215dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                tools:src="@drawable/spectre"
+                tools:src="@drawable/wonderwoman"
                 android:layout_marginLeft="5dp" />
 
             <RelativeLayout
@@ -41,13 +46,6 @@
                 android:layout_height="match_parent"
 
                 >
-
-                <!--<android.support.design.widget.FloatingActionButton-->
-                <!--android:layout_width="70dp"-->
-                <!--android:layout_height="50dp"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:backgroundTint="@color/colorPrimaryDark"-->
-                <!--/>-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -66,7 +64,7 @@
                         android:id="@+id/calender_image"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_date"
+                        app:srcCompat="@drawable/ic_date"
                         android:padding="5dp"
                         android:layout_gravity="center_horizontal"
                         />
@@ -100,7 +98,7 @@
                             android:id="@+id/rating_image"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_top_rated"
+                            app:srcCompat="@drawable/ic_top_rated"
                             android:layout_gravity="center_horizontal"
                             />
 
@@ -118,7 +116,6 @@
 
                     </RelativeLayout>
 
-
                     <RelativeLayout
                         android:layout_margin="10dp"
                         android:id="@+id/genres"
@@ -130,51 +127,31 @@
 
                         <TextView
                             android:id="@+id/genre_1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="25dp"
-                            android:text="Genre: 1"
-                            android:gravity="center"
-                            android:textAlignment="center"
-                            android:backgroundTint="@color/blue_grey_900"
-                            android:background="@drawable/capsule_back"
-                            android:textColor="@color/white"
-                            android:textSize="16sp"
-                            />
-
-                        <!--<TextView-->
-                            <!--android:visibility="gone"-->
-                            <!--android:id="@+id/genre_2"-->
-                            <!--android:layout_width="100dp"-->
-                            <!--android:layout_height="25dp"-->
-                            <!--android:text="Genre: 1"-->
-                            <!--android:gravity="center"-->
-                            <!--android:textAlignment="center"-->
-                            <!--android:backgroundTint="@color/blue_grey_900"-->
-                            <!--android:background="@drawable/capsule_back"-->
-                            <!--android:layout_marginLeft="10dp"-->
-                            <!--android:layout_toRightOf="@id/genre_1"-->
-                            <!--android:textColor="@color/white"-->
-                            <!--android:textSize="16sp"-->
-                            <!--/>-->
-
-                        <TextView
-                            android:visibility="gone"
-                            android:id="@+id/genre_3"
-                            android:layout_below="@id/genre_1"
                             android:layout_width="100dp"
                             android:layout_height="25dp"
                             android:text="Genre: 1"
                             android:gravity="center"
-                            android:backgroundTint="@color/blue_grey_900"
                             android:textAlignment="center"
+                            android:backgroundTint="@color/blue_grey_900"
                             android:background="@drawable/capsule_back"
-                            android:layout_marginTop="10dp"
-                            android:layout_centerHorizontal="true"
                             android:textColor="@color/white"
                             android:textSize="16sp"
                             />
 
-
+                        <TextView
+                            android:id="@+id/genre_2"
+                            android:layout_width="100dp"
+                            android:layout_height="25dp"
+                            android:text="Genre: 1"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:backgroundTint="@color/blue_grey_900"
+                            android:background="@drawable/capsule_back"
+                            android:layout_marginLeft="10dp"
+                            android:layout_toRightOf="@id/genre_1"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            />
 
                     </RelativeLayout>
 
@@ -230,4 +207,19 @@
 
     </LinearLayout>
 
-</ScrollView>
+    </ScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center|right"
+        app:srcCompat="@drawable/ic_share"
+        android:tint="#263238"
+        app:fabSize="mini"
+        android:layout_alignParentRight="true" />
+
+</android.support.design.widget.CoordinatorLayout>

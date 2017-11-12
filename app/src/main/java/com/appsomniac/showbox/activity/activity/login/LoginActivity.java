@@ -272,11 +272,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 }
-
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
             }
         });
     }

@@ -19,7 +19,7 @@
             android:id="@+id/media_poster"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/spectre"
+            android:src="@drawable/wonderwoman"
             />
     </LinearLayout>
 

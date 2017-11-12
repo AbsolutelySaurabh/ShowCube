@@ -2,6 +2,7 @@ package com.appsomniac.showbox.activity.activity.singleMovie;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -64,6 +65,8 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
     private MyPlayerStateChangeListener myPlayerStateChangeListener;
     private MyPlaybackEventListener myPlaybackEventListener;
 
+    private FloatingActionButton fab;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,6 +80,8 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
             int sectionPosition = getIntent().getIntExtra("sectionPosition", 1);
             int itemPosition = getIntent().getIntExtra("itemPosition", 1);
             String movieId = getIntent().getStringExtra("movieId");
+
+            fab = findViewById(R.id.fab);
 
             VIDEO_URL = Config.Youtube_movie_get_video_url_part_1 + movieId + Config.Youtube_get_video_url_part_2;
             getVideoMovie(movieId);
@@ -249,8 +254,7 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
                 try {
 
                     TextView genre_1 = findViewById(R.id.genre_1);
-//                    TextView genre_2 = findViewById(R.id.genre_2);
-                    TextView genre_3 = findViewById(R.id.genre_3);
+                    TextView genre_2 = findViewById(R.id.genre_2);
 
                     JSONArray al_genres = responseObject.getJSONArray("genres");
                     ArrayList<String> al_genres_name = new ArrayList<String>();
@@ -270,44 +274,26 @@ public class SingleMovieActivity extends YouTubeBaseActivity implements YouTubeP
                         e.printStackTrace();
                     }
 
-                    if(al_genres_name.size() == 2){
+                    try{
 
-                        try {
-                            genre_3.setText(al_genres_name.get(1));
-                            genre_3.setVisibility(View.VISIBLE);
-
-                        }catch(NullPointerException e){
-                            genre_3.setVisibility(View.VISIBLE);
-                            e.printStackTrace();
-                        }catch(IndexOutOfBoundsException e){
-                            genre_3.setVisibility(View.VISIBLE);
-                            e.printStackTrace();
-                        }
-
-                    }
-
-//                    try {
-//                        genre_2.setText(al_genres_name.get(1));
-//                        genre_2.setVisibility(View.VISIBLE);
-//                    }catch(NullPointerException e){
-//                        genre_2.setVisibility(View.GONE);
-//                        e.printStackTrace();
-//                    }catch(IndexOutOfBoundsException e){
-//                        genre_2.setVisibility(View.GONE);
-//                        e.printStackTrace();
-//                    }
-
-                    try {
-                        genre_3.setText(al_genres_name.get(2));
-                        genre_3.setVisibility(View.VISIBLE);
-
+                        genre_2.setText(al_genres_name.get(1));
                     }catch(NullPointerException e){
-                        genre_3.setVisibility(View.VISIBLE);
                         e.printStackTrace();
                     }catch(IndexOutOfBoundsException e){
-                        genre_3.setVisibility(View.VISIBLE);
                         e.printStackTrace();
                     }
+
+                    fab = (FloatingActionButton) findViewById(R.id.fab);
+                    fab.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            Intent intent = new Intent(Intent.ACTION_SEND);
+                            intent.setType("text/plain");
+                            intent.putExtra(Intent.EXTRA_TEXT, "https://www.youtube.com/watch?v="+ VIDEO_ID);
+                            startActivity(Intent.createChooser(intent, "Share with"));
+                        }
+                    });
 
 
                 } catch (JSONException e){
