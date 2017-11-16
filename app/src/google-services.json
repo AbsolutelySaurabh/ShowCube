@@ -1,27 +1,43 @@
 {
   "project_info": {
-    "project_number": "704732756273",
-    "firebase_url": "https://showbox-be98a.firebaseio.com",
-    "project_id": "showbox-be98a",
-    "storage_bucket": "showbox-be98a.appspot.com"
+    "project_number": "855101290218",
+    "firebase_url": "https://showcube-80f73.firebaseio.com",
+    "project_id": "showcube-80f73",
+    "storage_bucket": "showcube-80f73.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:704732756273:android:c0cf8d1c68a45373",
+        "mobilesdk_app_id": "1:855101290218:android:4414a644ab6aa3e3",
         "android_client_info": {
-          "package_name": "com.appsomniac.showbox"
+          "package_name": "com.appsomniac.movie.tv.stream.showcube"
         }
       },
       "oauth_client": [
         {
-          "client_id": "704732756273-7hub6okjjikv5joapdriubpjv2tn74qj.apps.googleusercontent.com",
+          "client_id": "855101290218-c36d1u9701jpfl3la3ishv6777ddtrfa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appsomniac.movie.tv.stream.showcube",
+            "certificate_hash": "ea0311393c454fc359f0bebe55396a206538b39b"
+          }
+        },
+        {
+          "client_id": "855101290218-uie0hvl2615hr8d277h0tkre362tlm8n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appsomniac.movie.tv.stream.showcube",
+            "certificate_hash": "77fa6cfc266998859f70009899750da9d146b4e9"
+          }
+        },
+        {
+          "client_id": "855101290218-pqo12760ndtqjgp1emuht9tb3b3rf2l8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBCymXPNhR102bdpC0RJSkuScjDGhYtybE"
+          "current_key": "AIzaSyCtaqcsrVj2BYePBq_pQZEhm8vJ6Pl0DBE"
         }
       ],
       "services": {
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855101290218-pqo12760ndtqjgp1emuht9tb3b3rf2l8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

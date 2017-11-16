@@ -9,6 +9,11 @@
     android:background="@drawable/splash_back_9">
 
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        >
         <ImageView
             android:id="@+id/splash_image"
             android:layout_width="80dp"
@@ -23,10 +28,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/splash_image"
         android:layout_centerHorizontal="true"
-        android:text="ShowBox"
+        android:text="ShowCube"
+        android:layout_marginTop="25dp"
         android:textColor="@color/blue_grey_700"
         android:textSize="20sp"
         />
+
+        </RelativeLayout>
 
     <TextView
         android:textColor="@color/blue_grey_700"

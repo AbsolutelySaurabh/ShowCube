@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/avatar"
                 android:layout_centerHorizontal="true"
-                tools:text="ShowBox"
+                tools:text="showcube"
                 android:layout_alignParentStart="true"
                 android:textColor="@color/white"
                 android:textSize="15sp"

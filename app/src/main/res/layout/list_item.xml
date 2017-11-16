@@ -23,7 +23,6 @@
             android:titleTextAppearance="@style/Widget.ToolbarText"
             app:layout_scrollFlags="scroll|enterAlways"
             android:text="Now Playing"
-            android:layout_toLeftOf="@+id/btnMore"
             android:textAllCaps="true"
             android:textSize="18sp"
             />
