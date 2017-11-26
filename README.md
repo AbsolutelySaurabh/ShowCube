@@ -38,7 +38,11 @@ You can [download](https://drive.google.com/uc?export=download&id=1D8xx4FX4onx4r
   
   
 ## Demo  
-  <img  align="center" src="gifs/gif_1.gif" width="350" height="600" > <img align="center" src="gifs/gif_3.gif" width="350" height="600">
+  <img  align="center" src="gifs/gif_1.gif" width="280" height="500" > 
+  
+  <img align="center" src="gifs/gif_2.gif" width="280" height="500">
+
+<img align="center" src="gifs/gif_3.gif" width="280" height="500">
 
 
   
