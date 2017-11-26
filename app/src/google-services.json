@@ -1,43 +1,35 @@
 {
   "project_info": {
-    "project_number": "855101290218",
-    "firebase_url": "https://showcube-80f73.firebaseio.com",
-    "project_id": "showcube-80f73",
-    "storage_bucket": "showcube-80f73.appspot.com"
+    "project_number": "123380511282",
+    "firebase_url": "https://showcube-57d31.firebaseio.com",
+    "project_id": "showcube-57d31",
+    "storage_bucket": "showcube-57d31.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:855101290218:android:4414a644ab6aa3e3",
+        "mobilesdk_app_id": "1:123380511282:android:9096a89c9ad0dde0",
         "android_client_info": {
-          "package_name": "com.appsomniac.movie.tv.stream.showcube"
+          "package_name": "com.appsomniac.movie.tv.showcube"
         }
       },
       "oauth_client": [
         {
-          "client_id": "855101290218-c36d1u9701jpfl3la3ishv6777ddtrfa.apps.googleusercontent.com",
+          "client_id": "123380511282-j2s4n5i0bv1g0f6jhks4r4lc9994b5l2.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.appsomniac.movie.tv.stream.showcube",
-            "certificate_hash": "ea0311393c454fc359f0bebe55396a206538b39b"
-          }
-        },
-        {
-          "client_id": "855101290218-uie0hvl2615hr8d277h0tkre362tlm8n.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.appsomniac.movie.tv.stream.showcube",
+            "package_name": "com.appsomniac.movie.tv.showcube",
             "certificate_hash": "77fa6cfc266998859f70009899750da9d146b4e9"
           }
         },
         {
-          "client_id": "855101290218-pqo12760ndtqjgp1emuht9tb3b3rf2l8.apps.googleusercontent.com",
+          "client_id": "123380511282-9j5ua360vmd1p3fv826m83kjlin436ud.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCtaqcsrVj2BYePBq_pQZEhm8vJ6Pl0DBE"
+          "current_key": "AIzaSyDOrv_-Ajdj9NVTw2O5-SzP2-PxdPBf7tQ"
         }
       ],
       "services": {
@@ -48,7 +40,7 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "855101290218-pqo12760ndtqjgp1emuht9tb3b3rf2l8.apps.googleusercontent.com",
+              "client_id": "123380511282-9j5ua360vmd1p3fv826m83kjlin436ud.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

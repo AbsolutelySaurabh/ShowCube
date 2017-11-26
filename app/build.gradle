@@ -5,17 +5,17 @@ android {
         config {
             keyAlias 'AbsolutelySaurabh'
             keyPassword '9990465939'
-            storeFile file('/home/absolutelysaurabh/Documents/Key_Path/showcube/key.jks')
+            storeFile file('/home/absolutelysaurabh/Documents/Key_Path/ShowCube/key.jks')
             storePassword '9990465939'
         }
     }
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
     defaultConfig {
-        applicationId "com.appsomniac.movie.tv.stream.showcube"
+        applicationId "com.appsomniac.movie.tv.showcube"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 3
+        versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -24,6 +24,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
             signingConfig signingConfigs.config
         }
     }

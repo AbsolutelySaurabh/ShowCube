@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">showcube</string>
+    <string name="app_name">ShowCube</string>
     <string name="data_error">Data cannot be fetched</string>
     <string name="refresh_action">Try again</string>
     <string name="no_data_message">No data has been found</string>
