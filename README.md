@@ -38,8 +38,8 @@ You can [download](https://drive.google.com/uc?export=download&id=1D8xx4FX4onx4r
   
   
 ## Demo  
-  <img  src="gifs/gif_1.gif" width="280" height="490" >   <img src="gifs/gif_2.gif" width="280" height="490">
-  <img src="gifs/gif_3.gif" width="280" height="490">
+  <img  src="gifs/gif_1.gif" width="290" height="500" >   <img src="gifs/gif_2.gif" width="290" height="500">
+  <img src="gifs/gif_3.gif" width="290" height="500">
 
 
   
