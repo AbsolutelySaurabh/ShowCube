@@ -37,7 +37,7 @@ The user can watch teasers, trailers of movies, tv shows and can search the movi
 You can [download](https://docs.google.com/uc?export=download&id=0B1Zc1LkGIpxySFg0bHZISkNJYzg) latest installable version of WWE Tapout for Android.
   
   
-## Gameplay  
+## Demop  
 <img src="screenshots/one.png" width="400"> <img src="screenshots/two.png" width="400">
 <img src="screenshots/three.png" width="400"> <img src="screenshots/four.png" width="400">
 <img src="screenshots/five.png" width="400">
@@ -58,17 +58,17 @@ To fix a bug or enhance an existing module, follow these steps:
   
   
 ## Interested?  
-If you find a bug (the website couldn't handle the query and / or gave irrelevant results), kindly open an issue [here](https://github.com/thegenuinegourav/WWE-Tapout/issues/new) by including your search query and the expected result.  
+If you find a bug (the website couldn't handle the query and / or gave irrelevant results), kindly open an issue [here](https://github.com/AbsolutelySaurabh/ShowCube/issues/new) by including your search query and the expected result.  
   
-If you'd like to request a new functionality, feel free to do so by opening an issue [here](https://github.com/thegenuinegourav/WWE-Tapout/issues/new) including some sample queries and their corresponding results.
+If you'd like to request a new functionality, feel free to do so by opening an issue [here](https://github.com/AbsolutelySaurabh/ShowCube/issues/new) including some sample queries and their corresponding results.
   
   
 ## License
-[WWE](http://www.wwe.com/)
+[themoviedb](http://www.themoviedb.com/)
   
   
 ---
 
 > [thegenuinegourav.io](https://thegenuinegourav.github.io/) &nbsp;&middot;&nbsp;
-> GitHub [@thegenuinegourav](https://github.com/thegenuinegourav) &nbsp;&middot;&nbsp;
-> Youtube [@thegenuinegourav](https://www.youtube.com/channel/UCs8380tHxevj72ffRhbGoUw)
+> GitHub [@thegenuinegourav](https://github.com/AbsolutelySaurabh) &nbsp;&middot;&nbsp;
+> Youtube [@appsomniac](https://www.youtube.com/channel/UCHO9VuIlUZj8eoKi1cXMOyA
