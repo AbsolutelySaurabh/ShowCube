@@ -38,8 +38,7 @@ You can [download](https://drive.google.com/uc?export=download&id=1D8xx4FX4onx4r
   
   
 ## Demo  
-  <img align="left" src="gifs/gif_1.gif" width="400" height="650">
-  <img align="right" src="gifs/gif_3.gif" width="400" height="650">
+  <img align="left" src="gifs/gif_1.gif" width="400" > <img align="right" src="gifs/gif_3.gif" width="400">
 
 
   
