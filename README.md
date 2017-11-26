@@ -38,13 +38,9 @@ You can [download](https://drive.google.com/uc?export=download&id=1D8xx4FX4onx4r
   
   
 ## Demo  
-<p float="center">
-  <img src="gifs/gif_1.gif" width="400">
-</p>
-<p float="center">
-      <img src="gifs/gif_3.gif" width="400">
+  <img align="left" src="gifs/gif_1.gif" width="350" height="600">
+  <img align="right" src="gifs/gif_1.gif" width="350" height="600">
 
-</p>
 
   
 ## Development  
