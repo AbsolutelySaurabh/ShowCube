@@ -38,9 +38,9 @@ You can [download](https://docs.google.com/uc?export=download&id=0B1Zc1LkGIpxySF
   
   
 ## Demo screenshots  
-<img src="screenshots/1 - Screen 1.png.png" width="400"> <img src="screenshots/6 - Screen 2.png.png" width="400">
-<img src="screenshots/3 - Screen 3.png.png" width="400"> <img src="screenshots/1 - Screen 4.png.png" width="400">
-<img src="screenshots/5 - Screen 5.png.png" width="400"> <img src="screenshots/2 - Screen 6.png.png.png" width="400">
+<img src="screenshots/1 - Screen 1.png" width="400"> <img src="screenshots/6 - Screen 2.png" width="400">
+<img src="screenshots/3 - Screen 3.png" width="400"> <img src="screenshots/1 - Screen 4.png" width="400">
+<img src="screenshots/5 - Screen 5.png" width="400"> <img src="screenshots/2 - Screen 6.png" width="400">
   
   
 ## Development  
