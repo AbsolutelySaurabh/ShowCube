@@ -37,10 +37,8 @@ The user can watch teasers, trailers of movies, tv shows and can search the movi
 You can [download](https://docs.google.com/uc?export=download&id=0B1Zc1LkGIpxySFg0bHZISkNJYzg) latest installable version of ShowCube for Android.
   
   
-## Demo screenshots  
-<img src="screenshots/1 - Screen 1.png" width="350"> <img src="screenshots/6 - Screen 2.png" width="350">
-<img src="screenshots/3 - Screen 3.png" width="350"> <img src="screenshots/1 - Screen 4.png" width="350">
-<img src="screenshots/5 - Screen 5.png" width="350"> <img src="screenshots/2 - Screen 6.png" width="350">
+## Demo  
+<img src="gifs/1.mp4" width="350"> <img src="gifs/2.mp4" width="350">
   
   
 ## Development  
