@@ -34,7 +34,7 @@ The user can watch teasers, trailers of movies, tv shows and can search the movi
   
   
 ## Download
-You can [download](https://docs.google.com/uc?export=download&id=0B1Zc1LkGIpxySFg0bHZISkNJYzg) latest installable version of WWE Tapout for Android.
+You can [download](https://docs.google.com/uc?export=download&id=0B1Zc1LkGIpxySFg0bHZISkNJYzg) latest installable version of ShowCube for Android.
   
   
 ## Demop  
@@ -69,6 +69,5 @@ If you'd like to request a new functionality, feel free to do so by opening an i
   
 ---
 
-> [thegenuinegourav.io](https://thegenuinegourav.github.io/) &nbsp;&middot;&nbsp;
-> GitHub [@thegenuinegourav](https://github.com/AbsolutelySaurabh) &nbsp;&middot;&nbsp;
+> GitHub [@AbsolutelySaurabh](https://github.com/AbsolutelySaurabh) &nbsp;&middot;&nbsp;
 > Youtube [@appsomniac](https://www.youtube.com/channel/UCHO9VuIlUZj8eoKi1cXMOyA
