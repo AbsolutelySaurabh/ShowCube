@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.appsomniac.movie.tv.showcube.activity.activity.more.MoreActivity">
+    tools:context="com.dexter.innovation.labs.showcube.activity.activity.more.MoreActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
