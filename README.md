@@ -13,7 +13,7 @@
   <a href="https://github.com/AbsolutelySaurabh/ShowCube#fork-destination-box">
     . Contribute .
   </a>
-  <a href="https://drive.google.com/uc?export=download&id=1D8xx4FX4onx4rrjow4zWKnjMcFxV3pD8">
+  <a href="https://play.google.com/store/apps/details?id=dexter.appsomniac.showcube&hl=en">
     . Download .
   </a>
   <a href="https://www.youtube.com/watch?v=-wSzjN8s_R8&t=39s">
