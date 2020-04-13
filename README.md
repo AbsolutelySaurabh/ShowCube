@@ -37,7 +37,7 @@ The user can watch teasers, trailers of movies, tv shows and can search the movi
   
   
 ## Download
-You can [download](https://drive.google.com/uc?export=download&id=1D8xx4FX4onx4rrjow4zWKnjMcFxV3pD8) latest installable version of ShowCube for Android.
+You can [download](https://play.google.com/store/apps/details?id=dexter.appsomniac.showcube&hl=en) latest installable version of ShowCube for android from google playstore.
   
   
 ## Demo  
